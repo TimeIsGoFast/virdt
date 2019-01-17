@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.core4j.Enumerable;
 import org.odata4j.core.OEntity;
+import org.odata4j.edm.EdmType;
 
 public abstract class AbstractGetData implements GetDataService{
 	
@@ -19,8 +20,22 @@ public abstract class AbstractGetData implements GetDataService{
 				int count = oEntity.getProperties().size();
 				Map<String,String> map = new HashMap<>();
 				for(int i=0;i<count;i++){
-					map.put(oEntity.getProperties().get(i).getName(), oEntity.getProperties().get(i).getName());
+					if(oEntity.getProperties().get(i).getValue()==null){
+						EdmType edmType = oEntity.getProperties().get(i).getType();
+						if(edmType.equals(EdmType.INT32)||edmType.equals(EdmType.INT64)||edmType.equals(EdmType.DOUBLE)||edmType.equals(EdmType.INT16)){
+							map.put(oEntity.getProperties().get(i).getName(),"0");
+						}else{
+							map.put(oEntity.getProperties().get(i).getName(),"");
+						}
+						
+					}else{
+						map.put(oEntity.getProperties().get(i).getName(), oEntity.getProperties().get(i).getValue().toString());
+					}
+					
+					
+					
 				}
+				list.add(map);
 			}
 		} catch (Exception e) {
 			loger.error("getDataMap error "+e);
