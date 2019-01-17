@@ -9,7 +9,7 @@ import com.proven.utils.DateFormatUtil;
 public class DateTest {
 	@Test
 	public void testDateFormatter(){
-		String time = "2019-01-09T09:00:56.000";
+		String time = "2018-11-07T07:32:41.963";
 		try {
 			Date date = DateFormatUtil.dealDateFormat(time);
 			
