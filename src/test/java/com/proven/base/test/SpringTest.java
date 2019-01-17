@@ -1,0 +1,62 @@
+/**   
+ * Copyright © 2018 eSunny Info. Tech Ltd. All rights reserved.
+ * 
+ * 功能描述：
+ * @Package: com.proven.base.test 
+ * @author: Administrator   
+ * @date: 2018年9月18日 下午9:56:30 
+ */
+package com.proven.base.test;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.proven.base.vo.DataParam;
+import com.proven.quartz.GetDataService;
+import com.proven.quartz.GetDataServiceImpl;
+import com.proven.system.model.User;
+import com.proven.system.service.UserService;
+
+
+/**   
+* Copyright: Copyright (c) 2018 Weilong Zeng
+* 
+* @ClassName: SpringTest.java
+* @Description: 
+*
+* @version: v1.0.0
+* @author: Administrator
+* @date: 2018年9月18日 下午9:56:30 
+*
+*/
+@ContextConfiguration(locations = { "classpath:application.xml" })
+
+@RunWith(SpringJUnit4ClassRunner.class)
+public class SpringTest extends AbstractJUnit4SpringContextTests{
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private GetDataService GetDataService;
+	@Test
+	public void TestGetUser(){
+		List<User> users =  userService.selectAll();
+		users.forEach(user->System.err.println(user.toString()));
+	}
+	
+	@Test
+	public void TestGetUserData(){
+		GetDataService.getUserData(new DataParam());
+		
+	}
+	
+}

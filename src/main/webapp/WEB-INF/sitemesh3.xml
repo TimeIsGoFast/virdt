@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh> 
+ <!-- 指明满足“/*”的页面，将被“/WEB-INF/views/decorators/*”所装饰 --> 
+ <!--studentDecorator.jsp就是装饰页，下文会写到--> 
+ <mapping path="/renderLogin*" exclue="true" />
+ <mapping path="/system*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
+ <mapping path="/user*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
+ <mapping path="/session*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
+  <mapping path="/travel*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
+ <!--  <mapping path="/user*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" /> --> 
+ <!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 -->
+  
+
+</sitemesh>

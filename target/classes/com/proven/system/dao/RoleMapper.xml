@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.proven.system.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.proven.system.model.Role" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roid" property="roid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, roid, name, enabled, create_date, update_date, create_by, update_by, remark
+  </sql>
+    <select id="getRolesByUid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    *
+    from t_s_role t1,t_s_user_role t2,t_s_user t3 where t1.id=t2.role_id and t3.id=t2.user_id and t3.uid=#{uid}
+  </select>
+</mapper>

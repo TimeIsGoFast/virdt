@@ -1,0 +1,150 @@
+@charset "UTF-8";
+body{
+    background-color: #f7fafc;
+
+
+}
+.message{
+    margin-top: 50px;
+    width: 100%;
+    height: 230px;
+
+
+}
+.message img{
+    display: block;
+    margin: 40px auto;
+    width: 100px;
+
+}
+.message .p1{
+    font-family: "微软雅黑";
+    line-height: 60px;
+    font-size: 1.2em;
+
+    color: #17323f;
+    text-align: center;
+}
+.message .p2{
+    font-family: "微软雅黑";
+    font-size:3em;
+    font-weight: bold;
+    color: #eb283e;
+    text-align: center;
+}
+.navs-slider{
+    width: 160px;
+    height: 30px;
+    margin:20px auto;
+    text-align: center;
+    overflow: hidden;
+
+}
+.navs-slider a{
+    float: left;
+    font-size: 1.4em;
+    margin-left: 30px;
+    font-family: "Microsoft YaHei", serif;
+    color: #666;
+}
+.navs-slider a:active{
+    color:#eb283e;
+}
+._login{
+    width: 300px;
+    margin:auto;
+
+}
+._login form{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+._login div{
+    width: 300px;
+    height: 50px;
+
+
+
+}
+._login .div1{
+    border-bottom: 1px solid #ccc;
+}
+._login div input{
+    width: 280px;
+    height: 30px;
+    background: none;
+    margin: 10px;
+    font-family: "Microsoft YaHei", serif;
+    outline: none;
+}
+._login .submit1{
+    background-color: #eb283e;
+    font-size: 1.2em;
+    font-family: "Microsoft YaHei", serif;
+    border: 1px solid #eb283e;
+    border-radius: 3px;
+    color: white;
+    line-height: 41px;
+    width: 300px;
+    margin: 20px 0px;
+    outline: none;
+    cursor: pointer;
+
+}
+._login .submit1:active{
+    background-color: #ff4968;
+}
+._register{
+    width: 300px;
+    margin:auto;
+
+}
+._register form{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+._register div{
+    width: 300px;
+    height: 50px;
+
+
+
+}
+._register .div1{
+    border-bottom: 1px solid #ccc;
+}
+._register div input{
+    width: 280px;
+    height: 30px;
+    background: none;
+    margin: 10px;
+    font-family: "Microsoft YaHei", serif;
+    outline: none;
+}
+._register .submit1{
+    background-color: #eb283e;
+    font-size: 1.2em;
+    font-family: "Microsoft YaHei", serif;
+    border: 1px solid #eb283e;
+    border-radius: 3px;
+    color: white;
+    line-height: 41px;
+    width: 300px;
+    margin: 20px 0px;
+    outline: none;
+    cursor: pointer;
+
+}
+._register .submit1:active{
+    background-color: #ff4968;
+}
+.error_message{
+	display:block;
+	width:300px;
+	height:20px;
+   color:#eb283e;
+   line-height:20px;
+   font-size: 1.2em;
+   font-family: "Microsoft YaHei", serif;
+   margin:10px auto;
+}
