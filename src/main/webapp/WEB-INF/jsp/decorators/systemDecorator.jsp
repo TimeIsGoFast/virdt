@@ -65,10 +65,10 @@
                         <a id="_index" href="${pageContext.request.contextPath}/index.do" id="dashboard"><i class="fa fa-dashboard"></i>主页</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/user/render.do" id="userManage"><i class="fa fa-users"></i>用户管理</a>
+                        <a href="${pageContext.request.contextPath}/deskUser/render.do" id="userManage"><i class="fa fa-users"></i>用户管理</a>
                     </li>
                      <li>
-                        <a href="${pageContext.request.contextPath}/session/render.do" id="bookInfo"><i class="fa fa-book"></i>会话记录</a>
+                        <a href="${pageContext.request.contextPath}/session/render.do" id="sessionInfo"><i class="fa fa-book"></i>会话记录</a>
                     </li>
              <%--        <li>
                         <a href="${pageContext.request.contextPath}/travel/render.do" id="touristInfo"><i class="fa fa-map-marker"></i>会话记录</a>

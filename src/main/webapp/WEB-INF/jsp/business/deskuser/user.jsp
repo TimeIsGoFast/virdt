@@ -5,18 +5,20 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>书籍管理</title>
+<title>用户管理</title>
      <!-- Google Fonts-->
    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="${pageContext.request.contextPath}/static/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
+
+
 		  <div class="header"> 
-              <h1 class="page-header">
-                  <a href="${pageContext.request.contextPath }/book/bookDetail/0.do" class="btn btn-info">添加书籍</a>
-              </h1>
-     
+                    <h1 class="page-header">
+                    </h1>
+                    
 		 </div>
+  
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -26,29 +28,30 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>书名</th>
-                                            <th>作者</th>
-                                            <th>书籍类别</th>
-                                            <th>出版社</th>
-                                            <th>价格</th>
-                                            <th>出版日期</th>
-                                            <th>热门等级</th>
+                                            <th>Id</th>
+                                            <th>UserName</th>
+                                            <th>FullName</th>
+                                            <th>Upn</th>
+                                            <th>Domain</th>
+                                            <th>CreatDate</th>
+                                            <th>ModifiedDate</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         <c:forEach items="${list}" var="Book">
-                                            <tr class="odd gradeX">
-                                            <td>${Book.bookName }</td>
-                                            <td>${Book.author }</td>
-                                            <td>${Book.bookType }</td>
-                                            <td class="center">${Book.publics }</td>
-                                            <td class="center">${Book.price }</td>
-                                            <td class="center">${Book.publicDate }</td>
-                                            <td class="center">${Book.grade }</td>
+                                         <c:forEach items="${list}" var="User">
+                                            <td>${User.id }</td>
+                                            <td>${User.userName }</td>
+                                            <td>${User.fullName }</td>
+                                        
+                                            <td class="center">${User.upn }</td>
+                                            <td class="center">${User.domain}</td>
+                                            <td class="center">${User.creatDate}</td>
+                                             <td class="center">${User.modifiedDate}</td>
                                             <td align="center">
-                                            <button class="btn btn-primary" title='详情' onclick="bookDetail('${Book.id}')" data-toggle="modal" data-target="#myModal"><i class="fa fa-book "></i></button>
-                                            <button class="btn btn-danger" title='删除' onclick="_deleteBook('${Book.id}')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <button class="btn btn-primary" title='编辑' data-toggle="modal" data-target="#myModal"><i class="fa fa-edit "></i></button>
+                                            <button class="btn btn-danger" title='删除' onclick="deleteUser('${User.id}')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                  
                                             </td>
                                         </tr>
                                          </c:forEach>
@@ -74,7 +77,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                            <button type="button" class="btn btn-primary" id="deleteBook2">确认</button>
+                                            <button type="button" class="btn btn-primary" id="deleteUser2">确认</button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,6 +86,6 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/book.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/user.js"></script>
     
 
