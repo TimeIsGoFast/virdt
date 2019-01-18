@@ -92,6 +92,6 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/user.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/session.js"></script>
     
 
