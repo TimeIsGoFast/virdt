@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.proven.business.model.DeskUser;
 import com.proven.business.model.Session;
 
 public class SetDataUtils {
@@ -37,5 +38,23 @@ public class SetDataUtils {
 		}
 		
 		return sessionList;
+	}
+
+	public static List<DeskUser> setDeskUserData(List<Map<String, String>> list) {
+		List<DeskUser> userList = new ArrayList<>();
+		
+		for(Map<String,String> map:list){
+			DeskUser deskUser = new DeskUser();
+			deskUser.setCreatDate(DateFormatUtil.dealDateFormat(map.get("CreatedDate")));
+			deskUser.setDomain(map.get("Domain"));
+			deskUser.setFullName(map.get("FullName"));
+			deskUser.setId(Integer.parseInt(map.get("Id")));
+			deskUser.setModifiedDate(DateFormatUtil.dealDateFormat(map.get("ModifiedDate")));
+			deskUser.setSid(map.get("Sid"));
+			deskUser.setUpn(map.get("Upn"));
+			deskUser.setUserName(map.get("UserName"));
+			userList.add(deskUser);
+		}
+		return userList;
 	}
 }

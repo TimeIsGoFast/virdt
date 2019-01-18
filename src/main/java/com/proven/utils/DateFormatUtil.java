@@ -29,7 +29,7 @@ public class DateFormatUtil {
 			String date1 = sdf.format(date);
 			 return sdf.parse(date1);
 		} catch (ParseException e) {
-			logger.info("dealDateFormat date is null"+e);
+			logger.error("dealDateFormat date is null"+e);
 			return null;
 		}
 		
@@ -37,4 +37,15 @@ public class DateFormatUtil {
 		
 
      }
+     
+     /**
+      * getCurrentTime,the format is "yyyy-MM-dd'T'HH:mm:ss.SSS"
+      * StartDate ge DateTime'2018-11-07T07:32:41.963'
+      * @return String
+      */
+	public static String getCurrentTime() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+ 		String dateTime = format.format(new Date());
+		return "'"+dateTime+"T00:00:00.000'";
+	}
 }

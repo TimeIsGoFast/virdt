@@ -19,4 +19,9 @@ public class DateTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testGetCurrentTime(){
+		System.out.println(DateFormatUtil.getCurrentTime());
+	}
 }

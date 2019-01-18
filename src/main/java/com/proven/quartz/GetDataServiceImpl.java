@@ -1,5 +1,6 @@
 package com.proven.quartz;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,35 +14,61 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proven.base.vo.DataParam;
+import com.proven.business.model.DeskUser;
 import com.proven.business.model.Session;
+import com.proven.business.service.DeskUserService;
 import com.proven.business.service.SessionService;
+import com.proven.utils.DateFormatUtil;
 import com.proven.utils.SetDataUtils;
 
 @Service
 @Transactional
 public class GetDataServiceImpl extends AbstractGetData{
+	public static final String SERVICE_URL = "http://192.168.20.9/Citrix/Monitor/OData/v1/Data";
+	
 	@Autowired
 	private SessionService sessionService;
 	
+	@Autowired
+	private DeskUserService deskUserService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(GetDataServiceImpl.class);
 	@Override
-	public void getUserData(DataParam param) {
-		String serviceUrl = "http://192.168.20.9/Citrix/Monitor/OData/v1/Data";
-		ODataConsumer consumer = ODataConsumer.create(serviceUrl);
+	public int getUserData(DataParam param) {
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
 		String entitySetName = "Users";
 		Enumerable<OEntity> qList = consumer.getEntities(entitySetName).execute();
 	    List<Map<String,String>> list = getDataMap(qList);
-	    
-	    
+	    List<Integer> idList = deskUserService.getIds();
+	    try{
+	    	List<DeskUser> userlist = SetDataUtils.setDeskUserData(list);
+	    	for (DeskUser user : userlist) {
+	    		if(!idList.contains(user.getId())){
+	    			deskUserService.save(user);
+	    		}
+	    		
+			}
+	    	
+	    }catch(Exception e){
+	    	logger.error("getUserData error:"+e.getMessage());
+	    	return 0;
+	    }
+	    return 1;
 		
 	}
 
 	@Override
-	public void getSessionData(DataParam param){
-		String serviceUrl = "http://192.168.20.9/Citrix/Monitor/OData/v1/Data";
-		ODataConsumer consumer = ODataConsumer.create(serviceUrl);
+	public int getSessionData(DataParam param){
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
 		String entitySetName = "Sessions";
-		Enumerable<OEntity> qList = consumer.getEntities(entitySetName).execute();
+		StringBuilder strbui = new StringBuilder("StartDate ge DateTime");
+		strbui.append(DateFormatUtil.getCurrentTime());
+		Enumerable<OEntity> qList;
+		if(param.isFreashAll()){
+			qList = consumer.getEntities(entitySetName).orderBy("StartDate desc").execute();
+		}else{
+			qList = consumer.getEntities(entitySetName).filter(strbui.toString()).orderBy("StartDate desc").execute();    
+		}
 	    List<Map<String,String>> list = getDataMap(qList);
 	    try{
 	    	List<Session> selist = SetDataUtils.setSessionData(list);
@@ -50,9 +77,40 @@ public class GetDataServiceImpl extends AbstractGetData{
 			}
 	    	
 	    }catch(Exception e){
-	    	logger.error("getSessionData error:"+e);
+	    	logger.error("getSessionData error:"+e.getMessage());
+	    	return 0;
 	    }
+	    return 1;
 	
+	}
+
+	@Override
+	public int updateSessionData() {
+		List<String> list = sessionService.getEndDateIsnull();
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
+		String entitySetName = "Sessions";
+		List<Map<String,String>> querylist = new ArrayList<>();
+		List<Session> selist = new ArrayList<>();
+		Enumerable<OEntity> qList = null;
+		try {
+			for (String string : list) {
+				qList =  consumer.getEntities(entitySetName).filter("SessionKey eq GUID'"+string+"'").execute();
+
+				if(qList!=null){
+					querylist = getDataMap(qList);
+					selist = SetDataUtils.setSessionData(querylist);
+					for (Session session : selist) {
+						sessionService.deleteBySessionKey(session.getSessionKey());
+			    		sessionService.update(session);
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.error("getSessionData error:"+e.getMessage());
+	    	return 0;
+		}
+	
+		return 1;
 	}
 	
 		
