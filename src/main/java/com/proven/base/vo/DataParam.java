@@ -9,6 +9,14 @@ public class DataParam {
 	private int index;
 	private Map<String,String> orderMap;
 	private List<String> selectList;
+	private boolean isFreashAll;
+	
+	public DataParam(){
+		this.isFreashAll=false;
+	}
+	public DataParam(boolean isFreashAll){
+		this.isFreashAll = isFreashAll;
+	}
 	public int getPage() {
 		return page;
 	}
@@ -38,6 +46,12 @@ public class DataParam {
 	}
 	public void setSelectList(List<String> selectList) {
 		this.selectList = selectList;
+	}
+	public boolean isFreashAll() {
+		return isFreashAll;
+	}
+	public void setFreashAll(boolean isFreashAll) {
+		this.isFreashAll = isFreashAll;
 	}
 	
 	

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.proven.base.vo.DataParam;
 import com.proven.quartz.GetDataService;
 
 @Controller
@@ -22,7 +21,7 @@ public class SessionController {
 	@RequestMapping("/refresh")
 	@ResponseBody
 	public void refresh(){
-		getDataService.getSessionData(null);
+		getDataService.getUserData(null);
 	}
 	
 

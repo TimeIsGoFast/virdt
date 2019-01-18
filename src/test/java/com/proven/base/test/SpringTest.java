@@ -20,8 +20,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.proven.base.vo.DataParam;
+import com.proven.business.service.SessionService;
 import com.proven.quartz.GetDataService;
-import com.proven.quartz.GetDataServiceImpl;
 import com.proven.system.model.User;
 import com.proven.system.service.UserService;
 
@@ -46,6 +46,9 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	private UserService userService;
 	
 	@Autowired
+	private SessionService sessionService;
+	
+	@Autowired
 	private GetDataService GetDataService;
 	@Test
 	public void TestGetUser(){
@@ -58,5 +61,25 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 		GetDataService.getUserData(new DataParam());
 		
 	}
+	
+	@Test
+	public void testGetEndDateIsNull(){
+		List<String> list = sessionService.getEndDateIsnull();
+		for (String string : list) {
+			System.out.println(string);
+		}
+		
+	}
+	@Test
+	public void testupdateSessionData(){
+		GetDataService.updateSessionData();
+	}
+	
+	@Test
+	public void testDeleteSessionBySessionKey(){
+		sessionService.deleteBySessionKey("aaa");
+	}
+	
+
 	
 }

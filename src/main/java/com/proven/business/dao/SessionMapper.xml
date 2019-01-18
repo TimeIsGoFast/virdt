@@ -29,4 +29,12 @@
     connection_state_change_date, life_cycle_state, current_connection_id, user_id, machine_id, 
     created_date, modified_date
   </sql>
+  
+  <select id="getEndDateIsnull" resultType="java.lang.String">
+  		select session_key from t_t_session where end_date IS null
+  </select>
+  
+  <delete id="deleteBySessionKey">
+  		DELETE  from t_t_session where session_key=#{key}
+  </delete>
 </mapper>

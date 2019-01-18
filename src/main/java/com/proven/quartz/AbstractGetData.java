@@ -38,7 +38,7 @@ public abstract class AbstractGetData implements GetDataService{
 				list.add(map);
 			}
 		} catch (Exception e) {
-			loger.error("getDataMap error "+e);
+			loger.error("getDataMap error "+e.toString());
 		}
 	
 
