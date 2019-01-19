@@ -80,6 +80,16 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 		sessionService.deleteBySessionKey("aaa");
 	}
 	
+	@Test
+	public void testGetDesktopGroups(){
+		GetDataService.getDesktopGroups(null);
+	}
+	
+	@Test
+	public void testGetMachineData(){
+		GetDataService.getMachineData(null);
+	}
+	
 
 	
 }

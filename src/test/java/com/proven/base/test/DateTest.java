@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.proven.utils.CommonUtil;
 import com.proven.utils.DateFormatUtil;
 
 public class DateTest {
@@ -23,5 +24,9 @@ public class DateTest {
 	@Test
 	public void testGetCurrentTime(){
 		System.out.println(DateFormatUtil.getCurrentTime());
+	}
+	@Test
+	public void testDealBoolean(){
+		System.out.println(CommonUtil.dealBoolean("false"));
 	}
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.proven.business.dao.MachineMapper" >
+  <resultMap id="BaseResultMap" type="com.proven.business.model.Machine" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="dns_name" property="dnsName" jdbcType="VARCHAR" />
+    <result column="lifecycle_state" property="lifecycleState" jdbcType="INTEGER" />
+    <result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
+    <result column="hosted_Machine_id" property="hostedMachineId" jdbcType="VARCHAR" />
+    <result column="hosting_server_name" property="hostingServerName" jdbcType="VARCHAR" />
+    <result column="hosted_machine_name" property="hostedMachineName" jdbcType="VARCHAR" />
+    <result column="is_assigned" property="isAssigned" jdbcType="INTEGER" />
+    <result column="is_in_maintenance_mode" property="isInMaintenanceMode" jdbcType="INTEGER" />
+    <result column="is_pending_update" property="isPendingUpdate" jdbcType="INTEGER" />
+    <result column="agent_version" property="agentVersion" jdbcType="VARCHAR" />
+    <result column="associated_user_full_names" property="associatedUserFullNames" jdbcType="VARCHAR" />
+    <result column="associated_user_names" property="associatedUserNames" jdbcType="VARCHAR" />
+    <result column="associated_user_UPNs" property="associatedUserUpns" jdbcType="VARCHAR" />
+    <result column="desktop_group_id" property="desktopGroupId" jdbcType="VARCHAR" />
+    <result column="current_registration_state" property="currentRegistrationState" jdbcType="INTEGER" />
+    <result column="registration_state_change_date" property="registrationStateChangeDate" jdbcType="TIMESTAMP" />
+    <result column="last_deregistered_date" property="lastDeregisteredDate" jdbcType="TIMESTAMP" />
+    <result column="last_deregistered_code" property="lastDeregisteredCode" jdbcType="INTEGER" />
+    <result column="current_power_state" property="currentPowerState" jdbcType="INTEGER" />
+    <result column="current_session_count" property="currentSessionCount" jdbcType="INTEGER" />
+    <result column="controller_dns_name" property="controllerDnsName" jdbcType="VARCHAR" />
+    <result column="powered_on_date" property="poweredOnDate" jdbcType="TIMESTAMP" />
+    <result column="powered_state_change_date" property="poweredStateChangeDate" jdbcType="TIMESTAMP" />
+    <result column="functional_level" property="functionalLevel" jdbcType="INTEGER" />
+    <result column="failure_date" property="failureDate" jdbcType="TIMESTAMP" />
+    <result column="windows_connection_setting" property="windowsConnectionSetting" jdbcType="INTEGER" />
+    <result column="is_preparing" property="isPreparing" jdbcType="INTEGER" />
+    <result column="fault_state" property="faultState" jdbcType="INTEGER" />
+    <result column="os_type" property="osType" jdbcType="VARCHAR" />
+    <result column="current_load_index_id" property="currentLoadIndexId" jdbcType="VARCHAR" />
+    <result column="catalog_id" property="catalogId" jdbcType="VARCHAR" />
+    <result column="hypervisor_id" property="hypervisorId" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="modified_date" property="modifiedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, sid, name, dns_name, lifecycle_state, ip_address, hosted_Machine_id, hosting_server_name, 
+    hosted_machine_name, is_assigned, is_in_maintenance_mode, is_pending_update, agent_version, 
+    associated_user_full_names, associated_user_names, associated_user_UPNs, current_registration_state, 
+    registration_state_change_date, last_deregistered_date, current_power_state, current_session_count, 
+    controller_dns_name, powered_on_date, powered_state_change_date, functional_level, 
+    failure_date, windows_connection_setting, is_preparing, fault_state, os_type, current_load_index_id, 
+    catalog_id, hypervisor_id, created_date, modified_date, desktop_group_id, last_deregistered_code
+  </sql>
+  <select id="getAllIds" resultType="java.lang.Integer">
+  select id from t_t_machine
+  </select>
+</mapper>

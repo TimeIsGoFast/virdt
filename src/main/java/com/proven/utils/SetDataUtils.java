@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.proven.business.model.DeskGroups;
 import com.proven.business.model.DeskUser;
+import com.proven.business.model.Machine;
 import com.proven.business.model.Session;
 
 public class SetDataUtils {
@@ -56,5 +58,69 @@ public class SetDataUtils {
 			userList.add(deskUser);
 		}
 		return userList;
+	}
+
+	public static List<DeskGroups> setDeskGroupData(List<Map<String, String>> querylist) {
+		List<DeskGroups> deskList = new ArrayList<>();
+		
+		for(Map<String,String> map:querylist){
+			DeskGroups deskGroup = new DeskGroups();
+			deskGroup.setCreateDate(DateFormatUtil.dealDateFormat(map.get("CreatedDate")));
+			deskGroup.setDesktopKind(Integer.parseInt(map.get("DesktopKind")));
+			deskGroup.setId(map.get("Id"));
+			deskGroup.setIsRemotePc(CommonUtil.dealBoolean(map.get("IsRemotePC")));
+			deskGroup.setLifeCycleState(Integer.parseInt(map.get("LifecycleState")));
+			deskGroup.setModifiedDate(DateFormatUtil.dealDateFormat(map.get("ModifiedDate")));
+			deskGroup.setName(map.get("Name"));
+			deskGroup.setSessionSupport(Integer.parseInt(map.get("SessionSupport")));
+			deskList.add(deskGroup);
+		}
+		return deskList;
+	}
+
+	public static List<Machine> setMachineData(List<Map<String, String>> querylist) {
+		List<Machine>  machineList = new ArrayList<>();
+		for (Map<String,String> map:querylist) {
+			Machine machine = new Machine();
+			machine.setId(map.get("Id"));
+			machine.setSid(map.get("Sid"));
+			machine.setName(map.get("Name"));
+			machine.setDnsName(map.get("DnsName"));
+			machine.setLifecycleState(Integer.parseInt(map.get("LifecycleState")));
+			machine.setIpAddress(map.get("IPAddress"));
+			machine.setHostedMachineId(map.get("HostedMachineId"));
+			machine.setHostingServerName(map.get("HostingServerName"));
+			machine.setHostedMachineName(map.get("HostedMachineName"));
+			machine.setIsAssigned(CommonUtil.dealBoolean(map.get("IsAssigned")));
+			machine.setIsInMaintenanceMode(CommonUtil.dealBoolean(map.get("IsInMaintenanceMode")));
+			machine.setIsPendingUpdate(CommonUtil.dealBoolean(map.get("IsPendingUpdate")));
+			machine.setAgentVersion(map.get("AgentVersion"));
+			machine.setAssociatedUserFullNames(map.get("AssociatedUserFullNames"));
+			machine.setAssociatedUserNames(map.get("AssociatedUserNames"));
+			machine.setAssociatedUserUpns(map.get("AssociatedUserUPNs"));
+			machine.setCurrentRegistrationState(Integer.parseInt(map.get("CurrentRegistrationState")));
+			machine.setRegistrationStateChangeDate(DateFormatUtil.dealDateFormat(map.get("RegistrationStateChangeDate")));
+			machine.setLastDeregisteredDate(DateFormatUtil.dealDateFormat(map.get("LastDeregisteredDate")));
+			machine.setLastDeregisteredCode(Integer.parseInt(map.get("LastDeregisteredCode")));
+			machine.setCurrentPowerState(Integer.parseInt(map.get("CurrentPowerState")));
+			machine.setCurrentSessionCount(Integer.parseInt(map.get("CurrentSessionCount")));
+			machine.setControllerDnsName(map.get("ControllerDnsName"));
+			machine.setPoweredOnDate(DateFormatUtil.dealDateFormat(map.get("PoweredOnDate")));
+			machine.setPoweredStateChangeDate(DateFormatUtil.dealDateFormat(map.get("PowerStateChangeDate")));
+			machine.setFunctionalLevel(Integer.parseInt(map.get("FunctionalLevel")));
+			machine.setFailureDate(DateFormatUtil.dealDateFormat(map.get("FailureDate")));
+			machine.setWindowsConnectionSetting(Integer.parseInt(map.get("WindowsConnectionSetting")));
+			machine.setIsPreparing(CommonUtil.dealBoolean(map.get("IsPreparing")));
+			machine.setFaultState(Integer.parseInt(map.get("FaultState")));
+			machine.setOsType(map.get("OSType"));
+			machine.setCurrentLoadIndexId(map.get("CurrentLoadIndexId"));
+			machine.setCatalogId(map.get("CatalogId"));
+			machine.setDesktopGroupId(map.get("DesktopGroupId"));
+			machine.setHypervisorId(map.get("HypervisorId"));
+			machine.setCreatedDate(DateFormatUtil.dealDateFormat(map.get("CreatedDate")));
+			machine.setModifiedDate(DateFormatUtil.dealDateFormat(map.get("ModifiedDate")));
+			machineList.add(machine);
+		}
+		return machineList;
 	}
 }

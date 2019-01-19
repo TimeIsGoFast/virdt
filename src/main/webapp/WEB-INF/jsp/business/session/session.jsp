@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <head>
@@ -28,32 +29,25 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>用户名</th>
-                                            <th>姓名</th>
-                                            <th>邮箱</th>
-                                            <th>性别</th>
-                                            <th>联系方式</th>
-                                            <th>是否启用</th>
+                                            <th>用户</th>
+                                            <th>计算机名称</th>
+                                            <th>交付组</th>
+                                            <th>会话开始时间</th>
+                                            <th>会话结束时间</th>
+                                            <th>会话时长</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         <c:forEach items="${list}" var="User">
+                                         <c:forEach items="${list}" var="Session">
                                             <tr class="odd gradeX">
-                                            <td>${User.uid }</td>
-                                            <td>${User.name }</td>
-                                            <td>${User.mail }</td>
-                                             <c:if test="${User.sex=='1'}">
-                                             <td>女</td>
-                                             </c:if>
-                                             <c:if test="${User.sex=='0'}">
-                                             <td>男</td>
-                                             </c:if>
-                                             <c:if test="${User.sex==null}">
-                                             <td></td>
-                                             </c:if>
-                                            <td class="center">${User.tel }</td>
-                                            <td class="center">${User.enabled}</td>
+                                            <td>${Session.userName}</td>
+                                            <td>${Session.computerName}</td>
+                                            <td>${Session.machineName}</td>
+             								<td><fmt:formatDate value="${Session.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                            <td><fmt:formatDate value="${Session.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>                             
+                                            <td class="center">${Session.logonDuration }</td>
+                                          
                                             <td align="center">
                                             <button class="btn btn-primary" title='编辑' data-toggle="modal" data-target="#myModal"><i class="fa fa-edit "></i></button>
                                             <button class="btn btn-danger" title='删除' onclick="deleteUser('${User.id}')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>

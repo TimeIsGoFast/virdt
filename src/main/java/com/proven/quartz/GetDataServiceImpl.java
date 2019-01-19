@@ -3,6 +3,7 @@ package com.proven.quartz;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.core4j.Enumerable;
 import org.odata4j.consumer.ODataConsumer;
@@ -14,9 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proven.base.vo.DataParam;
+import com.proven.business.model.DeskGroups;
 import com.proven.business.model.DeskUser;
+import com.proven.business.model.Machine;
 import com.proven.business.model.Session;
+import com.proven.business.service.DeskGroupsService;
 import com.proven.business.service.DeskUserService;
+import com.proven.business.service.MachineService;
 import com.proven.business.service.SessionService;
 import com.proven.utils.DateFormatUtil;
 import com.proven.utils.SetDataUtils;
@@ -32,6 +37,12 @@ public class GetDataServiceImpl extends AbstractGetData{
 	@Autowired
 	private DeskUserService deskUserService;
 	
+	@Autowired
+	private DeskGroupsService deskGroupsService;
+	
+	@Autowired
+	private MachineService machineService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(GetDataServiceImpl.class);
 	@Override
 	public int getUserData(DataParam param) {
@@ -45,6 +56,8 @@ public class GetDataServiceImpl extends AbstractGetData{
 	    	for (DeskUser user : userlist) {
 	    		if(!idList.contains(user.getId())){
 	    			deskUserService.save(user);
+	    		}else{
+	    			deskUserService.update(user);
 	    		}
 	    		
 			}
@@ -110,6 +123,67 @@ public class GetDataServiceImpl extends AbstractGetData{
 	    	return 0;
 		}
 	
+		return 1;
+	}
+	/**set desktopGroups
+	 * getDesktopGroups
+	 */
+	@Override
+	public int getDesktopGroups(DataParam param) {
+		 
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
+		String entitySetName = "DesktopGroups";
+		List<Map<String,String>> querylist = new ArrayList<>();
+		List<DeskGroups> dlist = deskGroupsService.selectAll();
+		try {
+			Enumerable<OEntity> qList  =  consumer.getEntities(entitySetName).execute();
+			querylist = getDataMap(qList);
+			List<DeskGroups> selist  = SetDataUtils.setDeskGroupData(querylist);
+			if(dlist.isEmpty()){
+				for (DeskGroups deskGroups : selist) {
+					deskGroupsService.save(deskGroups);
+				}
+			}else{
+				for (DeskGroups deskGroups : selist) {
+					DeskGroups li = dlist.stream().filter(t->t.getId().equals(deskGroups.getId()))
+							.collect(Collectors.toList()).get(0);
+					if(li==null){
+						deskGroupsService.save(deskGroups);
+					}else{
+						deskGroupsService.update(deskGroups);
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			logger.error("getSessionData error:"+e.getMessage());
+	    	return 0;
+		}
+		return 1;
+	}
+
+	@Override
+	public int getMachineData(DataParam param) {
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
+		String entitySetName = "Machines";
+		List<Map<String,String>> querylist = new ArrayList<>();
+		try {
+			List<String> ids = machineService.getAllIds();
+			Enumerable<OEntity> qList  =  consumer.getEntities(entitySetName).execute();
+			querylist = getDataMap(qList);
+			List<Machine> melist  = SetDataUtils.setMachineData(querylist);
+			for (Machine machine : melist) {
+				if(ids.contains(machine.getId())){
+					machineService.update(machine);
+				}else{
+					machineService.save(machine);
+				}				
+			}
+		} catch (Exception e) {
+			logger.error("getSessionData error:"+e.getMessage());
+	    	return 0;
+		}
+		
 		return 1;
 	}
 	
