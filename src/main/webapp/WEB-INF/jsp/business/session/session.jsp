@@ -46,7 +46,7 @@
                                             <td>${Session.machineName}</td>
              								<td><fmt:formatDate value="${Session.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                             <td><fmt:formatDate value="${Session.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>                             
-                                            <td class="center">${Session.logonDuration }</td>
+                                            <td class="center">${Session.timeDiff }</td>
                                           
                                             <td align="center">
                                             <button class="btn btn-primary" title='编辑' data-toggle="modal" data-target="#myModal"><i class="fa fa-edit "></i></button>

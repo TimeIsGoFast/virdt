@@ -86,6 +86,7 @@ public class GetDataServiceImpl extends AbstractGetData{
 	    try{
 	    	List<Session> selist = SetDataUtils.setSessionData(list);
 	    	for (Session session : selist) {
+	    		session.setTimeDiff(DateFormatUtil.getTimeDiff(session.getStartDate(),session.getEndDate()) );
 	    		sessionService.save(session);
 			}
 	    	

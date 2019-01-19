@@ -64,6 +64,9 @@ public class SessionView implements Serializable {
 
     @Column(name = "desktop_group_id")
     private String desktopGroupId;
+    
+    @Column(name = "time_diff")
+    private String timeDiff;
 
     private static final long serialVersionUID = 1L;
 
@@ -339,6 +342,14 @@ public class SessionView implements Serializable {
 
 	public void setComputerName(String computerName) {
 		this.computerName = computerName;
+	}
+
+	public String getTimeDiff() {
+		return timeDiff;
+	}
+
+	public void setTimeDiff(String timeDiff) {
+		this.timeDiff = timeDiff;
 	}
     
     

@@ -25,5 +25,6 @@
     <result column="machine_name" property="machineName" jdbcType="VARCHAR" />
     <result column="computer_name" property="computerName" jdbcType="VARCHAR" />
     <result column="desktop_group_id" property="desktopGroupId" jdbcType="VARCHAR" />
+    <result column="time_diff" property="timeDiff" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>
