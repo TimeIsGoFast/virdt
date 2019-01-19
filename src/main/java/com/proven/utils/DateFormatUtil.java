@@ -46,4 +46,16 @@ public class DateFormatUtil {
  		String dateTime = format.format(new Date());
 		return "'"+dateTime+"T00:00:00.000'";
 	}
+	
+	public static String getTimeDiff(Date date1,Date date2){
+		if(date1==null||date2==null){
+			return null;
+		}
+		long between = date2.getTime() - date1.getTime();
+		long hour = between / (60 * 60 * 1000);
+		long min = ((between / (60 * 1000)) - hour * 60);
+
+		return hour+":"+min;
+	}
+
 }

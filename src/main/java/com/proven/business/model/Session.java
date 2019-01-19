@@ -35,6 +35,9 @@ public class Session implements Serializable {
 
     @Column(name = "life_cycle_state")
     private String lifeCycleState;
+    
+    @Column(name = "time_diff")
+    private String timeDiff;
 
     @Column(name = "current_connection_id")
     private Integer currentConnectionId;
@@ -262,4 +265,14 @@ public class Session implements Serializable {
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
+	public String getTimeDiff() {
+		return timeDiff;
+	}
+
+	public void setTimeDiff(String timeDiff) {
+		this.timeDiff = timeDiff;
+	}
+    
+    
 }

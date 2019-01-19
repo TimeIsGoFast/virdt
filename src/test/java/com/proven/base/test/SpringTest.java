@@ -72,7 +72,7 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	}
 	@Test
 	public void testupdateSessionData(){
-		GetDataService.updateSessionData();
+		GetDataService.getSessionData(new DataParam(true));
 	}
 	
 	@Test

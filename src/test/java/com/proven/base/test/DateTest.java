@@ -29,4 +29,13 @@ public class DateTest {
 	public void testDealBoolean(){
 		System.out.println(CommonUtil.dealBoolean("false"));
 	}
+	
+	@Test
+	public void testGeTimeDiff() throws InterruptedException{
+		Date date1 = new Date();
+		Thread.sleep(5000);
+		Date date2 = new Date();
+		System.out.println(DateFormatUtil.getTimeDiff(date1, date2));
+		
+	}
 }

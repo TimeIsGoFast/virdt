@@ -20,6 +20,7 @@
     <result column="machine_id" property="machineId" jdbcType="VARCHAR" />
     <result column="created_date" property="createdDate" jdbcType="DATE" />
     <result column="modified_date" property="modifiedDate" jdbcType="DATE" />
+    <result column="time_diff" property="timeDiff" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
@@ -27,7 +28,7 @@
     -->
     id, session_key, start_date, logon_duration, end_date, exit_code, failure_date, connection_state, 
     connection_state_change_date, life_cycle_state, current_connection_id, user_id, machine_id, 
-    created_date, modified_date
+    created_date, modified_date, time_diff
   </sql>
   
   <select id="getEndDateIsnull" resultType="java.lang.String">

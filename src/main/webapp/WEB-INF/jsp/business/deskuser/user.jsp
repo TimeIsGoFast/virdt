@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <head>
@@ -46,8 +47,8 @@
                                         
                                             <td class="center">${User.upn }</td>
                                             <td class="center">${User.domain}</td>
-                                            <td class="center">${User.creatDate}</td>
-                                             <td class="center">${User.modifiedDate}</td>
+                                            <td class="center"><fmt:formatDate value="${User.creatDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                             <td class="center"><fmt:formatDate value="${User.modifiedDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                             <td align="center">
                                             <button class="btn btn-primary" title='编辑' data-toggle="modal" data-target="#myModal"><i class="fa fa-edit "></i></button>
                                             <button class="btn btn-danger" title='删除' onclick="deleteUser('${User.id}')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
