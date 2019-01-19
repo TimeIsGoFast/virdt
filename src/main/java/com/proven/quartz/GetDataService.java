@@ -8,4 +8,8 @@ public interface GetDataService {
 	public int getSessionData(DataParam param);
 	
 	public int updateSessionData();
+	
+	public int getDesktopGroups(DataParam param);
+	
+	public int getMachineData(DataParam param);
 }

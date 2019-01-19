@@ -24,6 +24,8 @@ public abstract class AbstractGetData implements GetDataService{
 						EdmType edmType = oEntity.getProperties().get(i).getType();
 						if(edmType.equals(EdmType.INT32)||edmType.equals(EdmType.INT64)||edmType.equals(EdmType.DOUBLE)||edmType.equals(EdmType.INT16)){
 							map.put(oEntity.getProperties().get(i).getName(),"0");
+						}else if(edmType.equals(EdmType.BOOLEAN)){
+							map.put(oEntity.getProperties().get(i).getName(),"flase");
 						}else{
 							map.put(oEntity.getProperties().get(i).getName(),"");
 						}

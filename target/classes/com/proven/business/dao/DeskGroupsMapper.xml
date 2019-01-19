@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.proven.business.dao.DeskGroupsMapper" >
+  <resultMap id="BaseResultMap" type="com.proven.business.model.DeskGroups" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_remote_pc" property="isRemotePc" jdbcType="INTEGER" />
+    <result column="desktop_kind" property="desktopKind" jdbcType="INTEGER" />
+    <result column="life_cycle_state" property="lifeCycleState" jdbcType="INTEGER" />
+    <result column="session_support" property="sessionSupport" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modified_date" property="modifiedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, name, is_remote_pc, desktop_kind, life_cycle_state, session_support, create_date, 
+    modified_date
+  </sql>
+</mapper>
