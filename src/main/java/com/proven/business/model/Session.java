@@ -7,8 +7,6 @@ import javax.persistence.*;
 @Table(name = "t_t_session")
 public class Session implements Serializable {
     @Id
-    private Integer id;
-
     @Column(name = "session_key")
     private String sessionKey;
 
@@ -35,9 +33,6 @@ public class Session implements Serializable {
 
     @Column(name = "life_cycle_state")
     private String lifeCycleState;
-    
-    @Column(name = "time_diff")
-    private String timeDiff;
 
     @Column(name = "current_connection_id")
     private Integer currentConnectionId;
@@ -54,21 +49,10 @@ public class Session implements Serializable {
     @Column(name = "modified_date")
     private Date modifiedDate;
 
+    @Column(name = "time_diff")
+    private String timeDiff;
+
     private static final long serialVersionUID = 1L;
-
-    /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * @return session_key
@@ -266,13 +250,17 @@ public class Session implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-	public String getTimeDiff() {
-		return timeDiff;
-	}
+    /**
+     * @return time_diff
+     */
+    public String getTimeDiff() {
+        return timeDiff;
+    }
 
-	public void setTimeDiff(String timeDiff) {
-		this.timeDiff = timeDiff;
-	}
-    
-    
+    /**
+     * @param timeDiff
+     */
+    public void setTimeDiff(String timeDiff) {
+        this.timeDiff = timeDiff == null ? null : timeDiff.trim();
+    }
 }

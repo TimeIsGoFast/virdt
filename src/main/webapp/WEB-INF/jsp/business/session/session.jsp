@@ -45,7 +45,15 @@
                                             <td>${Session.computerName}</td>
                                             <td>${Session.machineName}</td>
              								<td><fmt:formatDate value="${Session.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                            <td><fmt:formatDate value="${Session.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>                             
+             								<c:choose>
+             									<c:when test="${empty Session.endDate}">
+             										<td>正在运行</td>
+             									</c:when>
+             									<c:otherwise>
+             										 <td><fmt:formatDate value="${Session.endDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>                             					
+             									</c:otherwise>
+             								</c:choose>
+                                           
                                             <td class="center">${Session.timeDiff }</td>
                                           
                                             <td align="center">

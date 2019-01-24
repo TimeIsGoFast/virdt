@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 
 
@@ -21,8 +22,13 @@ public class DateFormatUtil {
     	 
 		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+		
 		 Date date;
-		try {
+		try { 
+			if(StringUtils.isEmpty(oldDateStr)){
+				logger.info("this date is null!");
+				return null; 
+		    }
 			date = sd.parse(oldDateStr);
 			String date1 = sdf.format(date);
 			 return sdf.parse(date1);

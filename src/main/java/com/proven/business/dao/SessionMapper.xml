@@ -5,33 +5,31 @@
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="session_key" property="sessionKey" jdbcType="VARCHAR" />
-    <result column="start_date" property="startDate" jdbcType="DATE" />
+    <id column="session_key" property="sessionKey" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
     <result column="logon_duration" property="logonDuration" jdbcType="INTEGER" />
-    <result column="end_date" property="endDate" jdbcType="DATE" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
     <result column="exit_code" property="exitCode" jdbcType="VARCHAR" />
-    <result column="failure_date" property="failureDate" jdbcType="DATE" />
+    <result column="failure_date" property="failureDate" jdbcType="TIMESTAMP" />
     <result column="connection_state" property="connectionState" jdbcType="VARCHAR" />
-    <result column="connection_state_change_date" property="connectionStateChangeDate" jdbcType="DATE" />
+    <result column="connection_state_change_date" property="connectionStateChangeDate" jdbcType="TIMESTAMP" />
     <result column="life_cycle_state" property="lifeCycleState" jdbcType="VARCHAR" />
     <result column="current_connection_id" property="currentConnectionId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="machine_id" property="machineId" jdbcType="VARCHAR" />
-    <result column="created_date" property="createdDate" jdbcType="DATE" />
-    <result column="modified_date" property="modifiedDate" jdbcType="DATE" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="modified_date" property="modifiedDate" jdbcType="TIMESTAMP" />
     <result column="time_diff" property="timeDiff" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
     -->
-    id, session_key, start_date, logon_duration, end_date, exit_code, failure_date, connection_state, 
+    session_key, start_date, logon_duration, end_date, exit_code, failure_date, connection_state, 
     connection_state_change_date, life_cycle_state, current_connection_id, user_id, machine_id, 
     created_date, modified_date, time_diff
   </sql>
-  
-  <select id="getEndDateIsnull" resultType="java.lang.String">
+   <select id="getEndDateIsnull" resultType="java.lang.String">
   		select session_key from t_t_session where end_date IS null
   </select>
   

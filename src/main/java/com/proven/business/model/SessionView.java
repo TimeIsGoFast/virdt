@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Table(name = "t_v_session")
 public class SessionView implements Serializable {
-    private Integer id;
 
     @Column(name = "session_key")
     private String sessionKey;
@@ -70,19 +69,6 @@ public class SessionView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * @return session_key
