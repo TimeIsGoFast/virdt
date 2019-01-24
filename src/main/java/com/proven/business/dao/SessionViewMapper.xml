@@ -5,7 +5,6 @@
     <!--
       WARNING - @mbggenerated
     -->
-    <result column="id" property="id" jdbcType="INTEGER" />
     <result column="session_key" property="sessionKey" jdbcType="VARCHAR" />
     <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
     <result column="logon_duration" property="logonDuration" jdbcType="INTEGER" />
@@ -27,4 +26,8 @@
     <result column="desktop_group_id" property="desktopGroupId" jdbcType="VARCHAR" />
     <result column="time_diff" property="timeDiff" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="selectAllOrderByEndDate" resultMap="BaseResultMap">
+  select * from t_v_session order by end_date ASC,start_date DESC
+  </select>
 </mapper>
