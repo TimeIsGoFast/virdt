@@ -8,4 +8,5 @@ public interface SessionViewService extends BaseService<SessionView>{
 
 	List<SessionView> selectAllOrderByEndDate();
 
+	
 }

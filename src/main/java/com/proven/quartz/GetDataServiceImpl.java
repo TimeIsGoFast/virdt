@@ -1,6 +1,7 @@
 package com.proven.quartz;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,12 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.proven.base.vo.DataParam;
 import com.proven.business.model.DeskGroups;
 import com.proven.business.model.DeskUser;
 import com.proven.business.model.Machine;
 import com.proven.business.model.Session;
+import com.proven.business.model.SessionView;
 import com.proven.business.service.DeskGroupsService;
 import com.proven.business.service.DeskUserService;
 import com.proven.business.service.MachineService;
@@ -44,6 +47,9 @@ public class GetDataServiceImpl extends AbstractGetData{
 	private MachineService machineService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(GetDataServiceImpl.class);
+	/**
+	 * 获取用户的信息并存储到数据库中
+	 */
 	@Override
 	public int getUserData(DataParam param) {
 		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
@@ -70,6 +76,9 @@ public class GetDataServiceImpl extends AbstractGetData{
 		
 	}
 
+	/**
+	 * 获取session的数据并且存到数据库中
+	 */
 	@Override
 	public int getSessionData(DataParam param){
 		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
@@ -97,7 +106,10 @@ public class GetDataServiceImpl extends AbstractGetData{
 	    return 1;
 	
 	}
-
+	/**
+	 * 更新session 的数据
+	 * 
+	 */
 	@Override
 	public int updateSessionData() {
 		List<String> list = sessionService.getEndDateIsnull();
@@ -162,7 +174,9 @@ public class GetDataServiceImpl extends AbstractGetData{
 		}
 		return 1;
 	}
-
+	/**
+	 * get machine data
+	 */
 	@Override
 	public int getMachineData(DataParam param) {
 		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
@@ -186,6 +200,58 @@ public class GetDataServiceImpl extends AbstractGetData{
 		}
 		
 		return 1;
+	}
+	/**
+	 * 得到实时的session 数据
+	 */
+	@Override
+	public List<SessionView> getCurrentStatus() {
+		//EndDate eq null
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
+		String entitySetName = "Sessions";
+		List<SessionView> list = new ArrayList<>();
+		try{
+			Enumerable<OEntity> qList = consumer.getEntities(entitySetName).filter("EndDate eq null").orderBy("StartDate desc").execute(); 
+			List<Map<String,String>> querylist = getDataMap(qList);
+			List<Session>  selist = SetDataUtils.setSessionData(querylist);
+			//将session的值set到sessionView中
+			list = SetDataUtils.transferSessionData(selist);
+			//将user name,machine name,computer name 设置到list中
+			List<Integer> countList = new ArrayList<>();
+			int count=0;
+			for(SessionView sview : list){
+				if(!StringUtils.isEmpty(sview.getFailureDate())){
+					countList.add(count);
+					continue;
+				}
+				DeskUser user = deskUserService.selectByKey(sview.getUserId());
+				Machine machine = machineService.selectByKey(sview.getMachineId());
+				DeskGroups deskgroups = deskGroupsService.selectByKey(machine.getDesktopGroupId());
+				//这里有个bug,以后修改，当user,machine,deskGroups 为null,现在直接把这条数据给清除掉了，按理应该先去更新一下user,machine,deskgroups的数据。
+				if(user==null||machine==null){
+					countList.add(count);
+					continue;
+				}else{
+					sview.setUserName(user.getUserName());
+					sview.setFullName(user.getFullName());
+					sview.setMachineName(machineService.selectByKey(sview.getMachineId()).getName());
+				}
+				
+				if(deskgroups==null){
+					countList.add(count);
+					continue;
+				}else{
+					sview.setComputerName(deskgroups.getName());
+				}
+				sview.setTimeDiff(DateFormatUtil.getTimeDiff(sview.getStartDate(), new Date()));
+				count++;
+			}
+			
+			
+		}catch(Exception e){
+			logger.error("getCurrentStatus error:"+e.getMessage());
+		}
+		return list;
 	}
 	
 		

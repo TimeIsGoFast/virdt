@@ -16,7 +16,7 @@
 <body>
 <div class="message">
     <img src="${pageContext.request.contextPath}/static/images/logo1.png">
-    <p class="p2">ONTEHWAY</p>
+    <p class="p2">VIRTUAL DESKTOP</p>
     <p class="p1">身体和灵魂，总要有一个在路上</p>
 </div>
 <div class="navs-slider">

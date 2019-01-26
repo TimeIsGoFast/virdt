@@ -15,7 +15,7 @@
 
 			  <div class="header"> 
               <h1 class="page-header">
-                  <a href="${pageContext.request.contextPath }/session/refresh.do" class="btn btn-info">刷新数据</a>
+                  <a href="${pageContext.request.contextPath }/session/current.do" class="btn btn-info">实时运行数据</a>
               </h1>
      
 		 </div>
@@ -30,6 +30,7 @@
                                     <thead>
                                         <tr>
                                             <th>用户</th>
+                                            <th>用户全称</th>
                                             <th>计算机名称</th>
                                             <th>交付组</th>
                                             <th>会话开始时间</th>
@@ -42,8 +43,9 @@
                                          <c:forEach items="${list}" var="Session">
                                             <tr class="odd gradeX">
                                             <td>${Session.userName}</td>
-                                            <td>${Session.computerName}</td>
+                                            <td>${Session.fullName}</td>
                                             <td>${Session.machineName}</td>
+                                            <td>${Session.computerName}</td>
              								<td><fmt:formatDate value="${Session.startDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
              								<c:choose>
              									<c:when test="${empty Session.endDate}">

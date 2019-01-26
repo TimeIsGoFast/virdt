@@ -1,9 +1,7 @@
 package com.proven.business.controller;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +22,15 @@ public class SessionController {
 	
 	@Autowired
 	private SessionViewService sessionViewService;
+	/**
+	 * get session index page
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/render")
 	public String render(Model model){
 		List<SessionView> slist = sessionViewService.selectAllOrderByEndDate();
+		//if end date is null,means the status is running,so set different time
 		slist.stream().filter(session->("".equals(session.getEndDate())||session.getEndDate()==null)
 				&&(!"".equals(session.getFailureDate())||session.getFailureDate()!=null))
 		.forEach(se->se.setTimeDiff(DateFormatUtil.getTimeDiff(se.getStartDate(), new Date())));
@@ -39,6 +43,16 @@ public class SessionController {
 	@ResponseBody
 	public void refresh(){
 		getDataService.getUserData(null);
+	}
+	
+	/**
+	 * get current status
+	 */
+	@RequestMapping("/current")
+	public String getCurrentStatus(Model model){
+		List<SessionView> list = getDataService.getCurrentStatus();
+		model.addAttribute("list", list);
+		return "business/session/session";
 	}
 	
 
