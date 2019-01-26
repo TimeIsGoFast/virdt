@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.proven.base.vo.DataParam;
+import com.proven.business.model.SessionView;
 import com.proven.business.service.SessionService;
 import com.proven.quartz.GetDataService;
 import com.proven.system.model.User;
@@ -50,6 +51,8 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	
 	@Autowired
 	private GetDataService GetDataService;
+	
+	
 	@Test
 	public void TestGetUser(){
 		List<User> users =  userService.selectAll();
@@ -90,6 +93,23 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 		GetDataService.getMachineData(null);
 	}
 	
+	/*@Test
+	public void testDeskUserCacheService(){
+		logger.debug("first time from db!");
+		deskuserService.getDeskUserById(1);
+		
+		logger.debug("second time data from cache!");
+		deskuserService.getDeskUserById(1);
+	}*/
+	
+	@Test
+	public void testGetCurrentStatus(){
+		List<SessionView> sessionList = GetDataService.getCurrentStatus();
+		for (SessionView sessionView : sessionList) {
+			logger.info(sessionView.getComputerName()+sessionView.getFullName()+sessionView.getTimeDiff());
+			
+		}
+	}
 
 	
 }

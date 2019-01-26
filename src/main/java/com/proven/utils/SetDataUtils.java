@@ -8,6 +8,7 @@ import com.proven.business.model.DeskGroups;
 import com.proven.business.model.DeskUser;
 import com.proven.business.model.Machine;
 import com.proven.business.model.Session;
+import com.proven.business.model.SessionView;
 
 public class SetDataUtils {
 	
@@ -77,7 +78,11 @@ public class SetDataUtils {
 		}
 		return deskList;
 	}
-
+	/**
+	 * set machine data
+	 * @param querylist
+	 * @return
+	 */
 	public static List<Machine> setMachineData(List<Map<String, String>> querylist) {
 		List<Machine>  machineList = new ArrayList<>();
 		for (Map<String,String> map:querylist) {
@@ -122,5 +127,34 @@ public class SetDataUtils {
 			machineList.add(machine);
 		}
 		return machineList;
+	}
+	
+	/**
+	 * 将session list 中的值transfer 到sessionView
+	 * @param selist
+	 * @return
+	 */
+	public static List<SessionView> transferSessionData(List<Session> selist) {
+		List<SessionView> vlist = new ArrayList<>();
+		
+		for(Session session:selist){
+			SessionView sv = new SessionView();
+			sv.setConnectionState(session.getConnectionState());
+			sv.setConnectionStateChangeDate(session.getConnectionStateChangeDate());
+			sv.setSessionKey(session.getSessionKey());
+			sv.setStartDate(session.getStartDate());
+			sv.setLogonDuration(session.getLogonDuration());
+			sv.setEndDate(session.getEndDate());
+			sv.setExitCode(session.getExitCode());
+			sv.setFailureDate(session.getFailureDate());
+			sv.setLifeCycleState(session.getLifeCycleState());
+			sv.setCurrentConnectionId(session.getCurrentConnectionId());
+			sv.setUserId(session.getUserId());
+			sv.setMachineId(session.getMachineId());
+			sv.setCreatedDate(session.getCreatedDate());
+			sv.setModifiedDate(session.getModifiedDate());
+			vlist.add(sv);
+		}
+		return vlist;
 	}
 }

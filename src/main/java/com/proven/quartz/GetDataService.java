@@ -1,6 +1,9 @@
 package com.proven.quartz;
 
+import java.util.List;
+
 import com.proven.base.vo.DataParam;
+import com.proven.business.model.SessionView;
 
 public interface GetDataService {
 	public int getUserData(DataParam param);
@@ -12,4 +15,6 @@ public interface GetDataService {
 	public int getDesktopGroups(DataParam param);
 	
 	public int getMachineData(DataParam param);
+
+	public List<SessionView> getCurrentStatus();
 }

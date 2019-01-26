@@ -27,7 +27,6 @@
 		<property name="sessionManager" ref="sessionManager" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
-
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		 <property name="loginUrl" value="/renderLogin.do" /> 
