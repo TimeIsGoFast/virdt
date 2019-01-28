@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.proven.business.model.SessionView;
 import com.proven.business.service.SessionViewService;
 import com.proven.quartz.GetDataService;
+import com.proven.system.model.User;
 import com.proven.utils.DateFormatUtil;
+import com.proven.utils.SpringUtil;
 
 @Controller
 @RequestMapping("/session")
@@ -51,6 +53,9 @@ public class SessionController {
 	@RequestMapping("/current")
 	public String getCurrentStatus(Model model){
 		List<SessionView> list = getDataService.getCurrentStatus();
+		//获取当前的用户信息，用来filter该用户下面的交付组使用情况
+		//TODO
+		//TODOUser currentUser = SpringUtil.getCurrentUser();	
 		model.addAttribute("list", list);
 		return "business/session/session";
 	}

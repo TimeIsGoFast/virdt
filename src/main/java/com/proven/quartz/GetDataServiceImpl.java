@@ -26,8 +26,10 @@ import com.proven.business.service.DeskGroupsService;
 import com.proven.business.service.DeskUserService;
 import com.proven.business.service.MachineService;
 import com.proven.business.service.SessionService;
+import com.proven.system.model.User;
 import com.proven.utils.DateFormatUtil;
 import com.proven.utils.SetDataUtils;
+import com.proven.utils.SpringUtil;
 
 @Service
 @Transactional
@@ -207,7 +209,7 @@ public class GetDataServiceImpl extends AbstractGetData{
 	@Override
 	public List<SessionView> getCurrentStatus() {
 		//EndDate eq null
-		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);	
 		String entitySetName = "Sessions";
 		List<SessionView> list = new ArrayList<>();
 		try{

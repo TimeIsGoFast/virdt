@@ -13,6 +13,9 @@ public class User implements Serializable {
      * 用户名
      */
     private String uid;
+    
+    @Column(name = "desk_user_id")
+    private Integer deskUserId;
 
     /**
      * 中文名
@@ -320,4 +323,14 @@ public class User implements Serializable {
     public void setSalt(String salt) {
         this.salt = salt == null ? null : salt.trim();
     }
+
+	public Integer getDeskUserId() {
+		return deskUserId;
+	}
+
+	public void setDeskUserId(Integer deskUserId) {
+		this.deskUserId = deskUserId;
+	}
+    
+    
 }
