@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.core4j.Enumerable;
 import org.odata4j.consumer.ODataConsumer;
 import org.odata4j.core.OEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +45,7 @@ public class GetDataServiceImpl extends AbstractGetData{
 	@Autowired
 	private MachineService machineService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(GetDataServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(GetDataServiceImpl.class);
 	/**
 	 * 获取用户的信息并存储到数据库中
 	 */
@@ -207,13 +206,15 @@ public class GetDataServiceImpl extends AbstractGetData{
 	@Override
 	public List<SessionView> getCurrentStatus() {
 		//EndDate eq null
-		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
+		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);	
 		String entitySetName = "Sessions";
 		List<SessionView> list = new ArrayList<>();
 		try{
 			Enumerable<OEntity> qList = consumer.getEntities(entitySetName).filter("EndDate eq null").orderBy("StartDate desc").execute(); 
 			List<Map<String,String>> querylist = getDataMap(qList);
 			List<Session>  selist = SetDataUtils.setSessionData(querylist);
+			//将start date 增加8个小时
+			selist.stream().forEach(Session->Session.setStartDate(DateFormatUtil.addEightHour(Session.getStartDate())));
 			//将session的值set到sessionView中
 			list = SetDataUtils.transferSessionData(selist);
 			//将user name,machine name,computer name 设置到list中

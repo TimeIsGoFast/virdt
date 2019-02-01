@@ -19,6 +19,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="desk_user_id" property="deskUserId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--

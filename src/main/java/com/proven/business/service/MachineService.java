@@ -9,4 +9,6 @@ public interface MachineService extends BaseService<Machine>{
 
 	List<String> getAllIds();
 
+	List<String> selectByUpn(String upn);
+
 }
