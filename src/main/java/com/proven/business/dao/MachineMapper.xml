@@ -58,4 +58,8 @@
   <select id="getAllIds" resultType="java.lang.Integer">
   select id from t_t_machine
   </select>
+  <select id="selectByUpn" resultType="java.lang.String">
+  select DISTINCT desktop_group_id from t_t_machine where associated_user_UPNs=#{upn}
+  </select>
+  
 </mapper>

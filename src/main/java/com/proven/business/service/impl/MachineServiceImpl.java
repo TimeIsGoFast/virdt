@@ -21,6 +21,11 @@ public class MachineServiceImpl extends BaseServiceImpl<Machine> implements Mach
 	public List<String> getAllIds() {
 		return machineMapper.getAllIds();
 	}
+
+	@Override
+	public List<String> selectByUpn(String upn) {
+		return machineMapper.selectByUpn(upn);
+	}
 	
 	
 }

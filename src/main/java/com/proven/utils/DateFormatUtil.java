@@ -11,6 +11,8 @@ import org.springframework.util.StringUtils;
 
 
 public class DateFormatUtil {
+	public static final long HOUR = 3600*1000;
+	
 	private static final Logger logger = LoggerFactory.getLogger(DateFormatUtil.class);
      public static String toDateoString(Date date){
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,6 +64,15 @@ public class DateFormatUtil {
 		long min = ((between / (60 * 1000)) - hour * 60);
 
 		return hour+":"+min;
+	}
+	
+	/**
+	 * 增加8个小时
+	 * @param date
+	 * @return
+	 */
+	public static Date addEightHour(Date date){
+		return new Date(date.getTime()+8*HOUR);
 	}
 
 }
