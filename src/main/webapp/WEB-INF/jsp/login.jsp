@@ -39,10 +39,10 @@
 <div class="_register" style="display: none" id="choseRegister">
     <form id="register_form" method="post">
         <div class="div1">
-            <input type="text" name="uid" id="_uid" placeholder="学号或手机号">
+            <input type="text" name="uid" id="_uid" placeholder="昵称或姓名">
         </div>
         <div class="div1">
-            <input type="text" name="name"  id="_name" placeholder="昵称或姓名">
+            <input type="text" name="name"  id="_name" placeholder="全称">
         </div>
         <div class="div2">
             <input type="password" name="password" id="_password" placeholder="密码(密码不小于6位)">
@@ -50,7 +50,7 @@
 
 
     </form>
-    <input type="button" value="注册sunshine" class="submit1" onclick="register_button()">
+    <input type="button" value="注册virdt" class="submit1" onclick="register_button()">
 </div>
 
 </body>
@@ -109,10 +109,10 @@
 		var pwd = $("#_password").val();
 		var reg = /^[0-9A-Za-z]{6,}$/;
 	
-		if(!uid.match("\\d+")){
+		/* if(!uid.match("\\d+")){
 			$(".error_message").text("账号必须为数字！");
 			return;
-		}
+		} */
 		if(!reg.test(pwd)){
 			$(".error_message").text("密码长度不小于六位！");
 			return;
