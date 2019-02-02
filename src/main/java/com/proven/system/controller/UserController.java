@@ -8,11 +8,15 @@
  */
 package com.proven.system.controller;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proven.base.controller.BaseController;
 import com.proven.system.model.User;
+import com.proven.system.service.UserService;
 
 /**   
 * Copyright: Copyright (c) 2018 Weilong Zeng
@@ -28,5 +32,24 @@ import com.proven.system.model.User;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController<User>{
-
+	@Autowired
+	private UserService userService;
+	
+    private static final Logger logger  = Logger.getLogger(UserController.class);
+    		
+	@RequestMapping("/register")
+	@ResponseBody
+	public int register(User user){
+		logger.info("username="+user.getUid()+" ,password"+user.getPassword()+" ,fullname"+user.getName()+" ,deskUserId"+user.getDeskUserId());
+		//TODO
+		//judge user is exist in database
+		User dbuser = userService.getUserByUid(user.getUid());
+		if(dbuser!=null){
+			//register
+			
+		}else{
+			return 0;
+		}
+		return 1;
+	}
 }

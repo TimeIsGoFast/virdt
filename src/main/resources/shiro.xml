@@ -45,6 +45,7 @@
 				/static/** =anon
 				/renderLogin**=anon
 				/login** = anon
+				/user/register** = anon
 				/logout** = anon
 				/index** = authc
 				/** = authc,urlPerms
