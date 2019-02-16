@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import com.proven.business.model.SessionView;
 import com.proven.business.service.DeskUserService;
 import com.proven.business.service.MachineService;
 import com.proven.business.service.SessionViewService;
+import com.proven.parambean.SessionParam;
 import com.proven.quartz.GetDataService;
 import com.proven.system.model.User;
 import com.proven.utils.DateFormatUtil;
@@ -26,6 +28,11 @@ import com.proven.utils.VirdtUtils;
 @Controller
 @RequestMapping("/session")
 public class SessionController {
+	
+	private static final Logger logger = Logger.getLogger(SessionController.class);
+	
+	
+	
 	@Autowired
 	private GetDataService getDataService;
 	
@@ -43,14 +50,31 @@ public class SessionController {
 	 * @return
 	 */
 	@RequestMapping("/render")
-	public String render(Model model){
-		List<SessionView> slist = sessionViewService.selectAllOrderByEndDate();
+	public String render(Model model,SessionParam sessionParam){
+		//according to time that transfer from front to select data
+		List<SessionView> slist = new ArrayList<>();
+		logger.info("deskgroupId="+sessionParam.getDeskgroupId()+",passTime="+sessionParam.getPassTime());
+		
+		slist = sessionViewService.selectByDeskgroupIdAndPassTime(sessionParam.getDeskgroupId(),sessionParam.getPassTime());
+		//slist = sessionViewService.selectAllOrderByEndDate();
 		//if end date is null,means the status is running,so set different time
 		slist.stream().filter(session->("".equals(session.getEndDate())||session.getEndDate()==null)
 				&&(!"".equals(session.getFailureDate())||session.getFailureDate()!=null))
 		.forEach(se->se.setTimeDiff(DateFormatUtil.getTimeDiff(se.getStartDate(), new Date())));
 
 		model.addAttribute("list", slist);
+		if(StringUtils.isEmpty(sessionParam.getDeskgroupId())){
+			model.addAttribute("deskgroupId", "all");
+		}else{
+			model.addAttribute("deskgroupId", sessionParam.getDeskgroupId());
+		}
+		if(StringUtils.isEmpty(sessionParam.getPassTime())){
+			model.addAttribute("passTime", "24h");
+		}else{
+			model.addAttribute("passTime", sessionParam.getPassTime());
+		}
+		
+		
 		return "business/session/session";
 	}
 	
@@ -83,7 +107,7 @@ public class SessionController {
 		}
 		//list.stream().filter(sessionView->sessionView.get)
 		model.addAttribute("list", newSessionViewList);
-		return "business/session/session";
+		return "business/session/current_run_session";
 	}
 	
 	

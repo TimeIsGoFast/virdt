@@ -2,18 +2,23 @@ package com.proven.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
+
+import com.proven.constans.Constans;
 
 
 
 public class DateFormatUtil {
 	public static final long HOUR = 3600*1000;
+	public static final long DAY = 3600*1000*24;
+	public static final long MONTH = 36000*1000*24*30;
+	public static final long YEAR = 3600*1000*24*30*365;
 	
-	private static final Logger logger = LoggerFactory.getLogger(DateFormatUtil.class);
+	private static final Logger logger = Logger.getLogger(DateFormatUtil.class);
      public static String toDateoString(Date date){
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
  		String dateTime = format.format(date);
@@ -74,5 +79,35 @@ public class DateFormatUtil {
 	public static Date addEightHour(Date date){
 		return new Date(date.getTime()+8*HOUR);
 	}
-
+	
+	/**
+	 * get date that differ time
+	 */
+	public static String getDifferTime(String passTime){
+		
+		//analysis passTime
+		String unit = passTime.substring(passTime.length()-1);
+		String value = passTime.substring(0, passTime.length()-1);
+		logger.info("unit="+unit+",value="+value);
+		if(Constans.DAY.equalsIgnoreCase(unit)){
+			return getStringDate(Calendar.DATE,Integer.parseInt(value));
+		}else if(Constans.MONTH.equalsIgnoreCase(unit)){
+			return getStringDate(Calendar.MONTH,Integer.parseInt(value));
+		}else if(Constans.HOUR.equalsIgnoreCase(unit)){
+			return getStringDate(Calendar.HOUR,Integer.parseInt(value));
+		}else if(Constans.YEAR.equalsIgnoreCase(unit)){
+			return getStringDate(Calendar.YEAR,Integer.parseInt(value));
+		}
+		return null;
+	}
+	
+	public static String getStringDate(int dateType,int value){
+		 SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 Calendar c = Calendar.getInstance();
+		 c.setTime(new Date());
+         c.add(dateType, value*(-1));
+         Date d = c.getTime();
+         return format.format(d);
+	      
+	}
 }

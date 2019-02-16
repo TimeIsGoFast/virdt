@@ -30,4 +30,13 @@
   <select id="selectAllOrderByEndDate" resultMap="BaseResultMap">
   select * from t_v_session order by end_date ASC,start_date DESC
   </select>
+  <select id="selectByPassTime" resultMap="BaseResultMap">
+   select * from t_v_session where start_date>= DATE_FORMAT(#{date},'%Y-%m-%d %H:%i:%s') order by end_date ASC,start_date DESC
+  </select>
+  
+   <select id="selectByDeskgroupIdAndPassTime" resultMap="BaseResultMap">
+   select * from t_v_session where start_date>= DATE_FORMAT(#{date},'%Y-%m-%d %H:%i:%s') and desktop_group_id=#{deskGroupId} order by end_date ASC,start_date DESC
+  </select>
+  
+  
 </mapper>

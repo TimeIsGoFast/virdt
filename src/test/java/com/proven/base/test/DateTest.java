@@ -38,4 +38,11 @@ public class DateTest {
 		System.out.println(DateFormatUtil.getTimeDiff(date1, date2));
 		
 	}
+	
+	//test getDifferTime
+	@Test
+	public void testGetDifferTime(){
+		System.out.println(DateFormatUtil.getDifferTime("2d"));
+		
+	}
 }
