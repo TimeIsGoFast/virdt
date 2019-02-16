@@ -8,5 +8,7 @@ public interface SessionViewService extends BaseService<SessionView>{
 
 	List<SessionView> selectAllOrderByEndDate();
 
+	List<SessionView> selectByDeskgroupIdAndPassTime(String deskgroupId, String passTime);
+
 	
 }

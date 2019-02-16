@@ -68,6 +68,9 @@
                      <li>
                         <a href="${pageContext.request.contextPath}/session/render.do" id="bookInfo"><i class="fa fa-book"></i>会话记录</a>
                     </li>
+                      <li>
+                        <a href="${pageContext.request.contextPath}/session/current.do" id="currentInfo"><i class="fa fa-refresh"></i>正在运行</a>
+                    </li>
              <%--        <li>
                         <a href="${pageContext.request.contextPath}/travel/render.do" id="touristInfo"><i class="fa fa-map-marker"></i>会话记录</a>
                     </li>

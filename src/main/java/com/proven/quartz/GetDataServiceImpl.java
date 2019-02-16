@@ -235,7 +235,8 @@ public class GetDataServiceImpl extends AbstractGetData{
 				}else{
 					sview.setUserName(user.getUserName());
 					sview.setFullName(user.getFullName());
-					sview.setMachineName(machineService.selectByKey(sview.getMachineId()).getName());
+					sview.setMachineName(machine.getName());
+					sview.setDesktopGroupId(machine.getDesktopGroupId());
 				}
 				
 				if(deskgroups==null){

@@ -1,10 +1,13 @@
- $(document).ready(function () {
-   /* $('#dataTables-example').dataTable();*/
-    $("#dataTables-example").dataTable();
-   　
-    $("#main-menu li a").removeClass("active-menu");
-	$("#sessionInfo").addClass("active-menu");
-	
+
+ 
+$(function(){
+	$("#searchByAddition").click(function(){
+		
+		var deskgroupId = $("#desktopId").val();
+		var passTime = $("#pass_time").val();
+		console.log("deskgroupId="+deskgroupId+",passTime="+passTime);
+		window.location.href=path+"/session/render.do?deskgroupId="+deskgroupId+"&passTime="+passTime;
+	});
 	
 });
  

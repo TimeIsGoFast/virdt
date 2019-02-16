@@ -14,40 +14,7 @@
 </head>
 
 			  <div class="page-header"> 
-                <!-- Split button -->
-                <div class="row">
-                        <div  class="col-md-1"><span  style="font-size:20px;line-height:35px;">交付组：</span>   </div>
-                		<div class="col-md-2 bs-example" data-example-ids="select-form-control" style="margin-left:-50px;">
-                		 
-					    <form>
-					      <select class="form-control" id="desktopId">
-					        <option value="all">全部</option>
-					        <option value="app">app</option>
-					        <option value="win7">win7</option>
-					      </select>
-					    </form>
-					  </div>
-					    <div  class="col-md-1"><span style="font-size:20px;line-height:35px;">时间段：</span>  </div>
-                		<div class="col-md-2 bs-example" data-example-ids="select-form-control"style="margin-left:-50px;">
-                		   
-					    <form>
-					      <select class="form-control" id="pass_time">
-					        <option value="2h">过去2小时</option>
-					        <option value="24h">过去24小时</option>
-					        <option value="7d">过去7天</option>
-					        <option value="1M">上月</option>
-					        <option value="1y">去年</option>
-					      </select>
-					    </form>
-					    
-					  </div>
-					  
-					  <div class="col-md-2">
-					  <button type="button" class="btn btn-primary" id="searchByAddition">应用</button>
-					  </div>
-                
-                </div>
-			
+                  <a href="${pageContext.request.contextPath }/session/current.do" class="btn btn-info">实时运行数据</a>
      
 		 </div>
   
@@ -127,23 +94,16 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/session.js"></script>
+    <script>
+    $(document).ready(function () {
+    	   /* $('#dataTables-example').dataTable();*/
+    	    $("#dataTables-example").dataTable();
+    	    $("#main-menu li a").removeClass("active-menu");
+    		$("#currentInfo").addClass("active-menu");
+    		
+    		
+    	});
+    	 
+    </script>
     
-    <script type="text/javascript">
-      $(document).ready(function () {
-   	   /* $('#dataTables-example').dataTable();*/
-   	    $("#dataTables-example").dataTable();
-   	   　
-   	    $("#main-menu li a").removeClass("active-menu");
-   		$("#sessionInfo").addClass("active-menu");
-   		
-   		var desktopId = '${deskgroupId}';
-   		var passTime ='${passTime}';
-   		$("#desktopId").val(desktopId);
-   		$("#pass_time").val(passTime);
-      });
-	</script>
-   
-	
-
 
