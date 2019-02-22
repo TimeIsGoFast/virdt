@@ -54,9 +54,9 @@ public class DateFormatUtil {
       * StartDate ge DateTime'2018-11-07T07:32:41.963'
       * @return String
       */
-	public static String getCurrentTime() {
+	public static String getCurrentTime(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
- 		String dateTime = format.format(new Date());
+ 		String dateTime = format.format(date);
 		return "'"+dateTime+"T00:00:00.000'";
 	}
 	
@@ -110,4 +110,12 @@ public class DateFormatUtil {
          return format.format(d);
 	      
 	}
+	//将string date 转换成Date date
+	public static Date parseDate(String date) throws ParseException {
+		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.parse(date);
+	}
+	
+	
+	
 }

@@ -83,15 +83,19 @@ public class GetDataServiceImpl extends AbstractGetData{
 		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);
 		String entitySetName = "Sessions";
 		StringBuilder strbui = new StringBuilder("StartDate ge DateTime");
-		strbui.append(DateFormatUtil.getCurrentTime());
-		Enumerable<OEntity> qList;
-		if(param.isFreashAll()){
-			qList = consumer.getEntities(entitySetName).orderBy("StartDate desc").execute();
-		}else{
-			qList = consumer.getEntities(entitySetName).filter(strbui.toString()).orderBy("StartDate desc").execute();    
+		//得到passtime 所对应的时间date
+		if(StringUtils.isEmpty(param.getPassTime())){
+			param.setPassTime("1y");
 		}
-	    List<Map<String,String>> list = getDataMap(qList);
+		String date = DateFormatUtil.getDifferTime(param.getPassTime());
+		//调用api 得到新的数据插入到数据苦衷	
 	    try{
+	    	strbui.append(DateFormatUtil.getCurrentTime(DateFormatUtil.parseDate(date)));
+			Enumerable<OEntity> qList;
+			qList = consumer.getEntities(entitySetName).filter(strbui.toString()).orderBy("StartDate desc").execute();    
+		    List<Map<String,String>> list = getDataMap(qList);
+	    	//通过这个date去数据库中删除date 之后的数据
+		    sessionService.deleteByLastDate(date);
 	    	List<Session> selist = SetDataUtils.setSessionData(list);
 	    	for (Session session : selist) {
 	    		session.setTimeDiff(DateFormatUtil.getTimeDiff(session.getStartDate(),session.getEndDate()) );

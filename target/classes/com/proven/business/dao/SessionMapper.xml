@@ -36,4 +36,7 @@
   <delete id="deleteBySessionKey">
   		DELETE  from t_t_session where session_key=#{key}
   </delete>
+  <delete id="deleteByLastDate">
+    DELETE from t_t_session where start_date>= DATE_FORMAT(#{date},'%Y-%m-%d %H:%i:%s')
+  </delete>
 </mapper>

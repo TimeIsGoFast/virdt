@@ -10,6 +10,7 @@ public class DataParam {
 	private Map<String,String> orderMap;
 	private List<String> selectList;
 	private boolean isFreashAll;
+	private String passTime;
 	
 	public DataParam(){
 		this.isFreashAll=false;
@@ -52,6 +53,12 @@ public class DataParam {
 	}
 	public void setFreashAll(boolean isFreashAll) {
 		this.isFreashAll = isFreashAll;
+	}
+	public String getPassTime() {
+		return passTime;
+	}
+	public void setPassTime(String passTime) {
+		this.passTime = passTime;
 	}
 	
 	

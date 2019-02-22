@@ -75,7 +75,9 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	}
 	@Test
 	public void testupdateSessionData(){
-		GetDataService.getSessionData(new DataParam(true));
+		DataParam param = new DataParam();
+		param.setPassTime("1y");
+		GetDataService.getSessionData(param);
 	}
 	
 	@Test

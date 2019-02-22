@@ -12,4 +12,6 @@ public interface SessionMapper extends Mapper<Session> {
 	List<String> getEndDateIsnull();
 
 	void deleteBySessionKey(@Param(value="key")String sessionKey);
+
+	void deleteByLastDate(@Param(value="date")String date);
 }

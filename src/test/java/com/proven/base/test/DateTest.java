@@ -23,7 +23,7 @@ public class DateTest {
 	
 	@Test
 	public void testGetCurrentTime(){
-		System.out.println(DateFormatUtil.getCurrentTime());
+		System.out.println(DateFormatUtil.getCurrentTime(new Date()));
 	}
 	@Test
 	public void testDealBoolean(){
