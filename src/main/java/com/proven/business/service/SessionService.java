@@ -11,4 +11,6 @@ public interface SessionService extends BaseService<Session>{
 
 	void deleteBySessionKey(String sessionKey);
 
+	void deleteByLastDate(String date);
+
 }

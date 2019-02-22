@@ -28,4 +28,10 @@ public class SessionServiceImpl extends BaseServiceImpl<Session> implements Sess
 		
 	}
 
+	@Override
+	public void deleteByLastDate(String date) {
+		sessionMapper.deleteByLastDate(date);
+		
+	}
+
 }
