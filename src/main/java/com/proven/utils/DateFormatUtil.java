@@ -89,22 +89,23 @@ public class DateFormatUtil {
 		String unit = passTime.substring(passTime.length()-1);
 		String value = passTime.substring(0, passTime.length()-1);
 		logger.info("unit="+unit+",value="+value);
+		Date date = new Date();
 		if(Constans.DAY.equalsIgnoreCase(unit)){
-			return getStringDate(Calendar.DATE,Integer.parseInt(value));
+			return getStringDate(Calendar.DATE,Integer.parseInt(value),date);
 		}else if(Constans.MONTH.equalsIgnoreCase(unit)){
-			return getStringDate(Calendar.MONTH,Integer.parseInt(value));
+			return getStringDate(Calendar.MONTH,Integer.parseInt(value),date);
 		}else if(Constans.HOUR.equalsIgnoreCase(unit)){
-			return getStringDate(Calendar.HOUR,Integer.parseInt(value));
+			return getStringDate(Calendar.HOUR,Integer.parseInt(value),date);
 		}else if(Constans.YEAR.equalsIgnoreCase(unit)){
-			return getStringDate(Calendar.YEAR,Integer.parseInt(value));
+			return getStringDate(Calendar.YEAR,Integer.parseInt(value),date);
 		}
 		return null;
 	}
 	
-	public static String getStringDate(int dateType,int value){
+	public static String getStringDate(int dateType,int value,Date date){
 		 SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 Calendar c = Calendar.getInstance();
-		 c.setTime(new Date());
+		 c.setTime(date);
          c.add(dateType, value*(-1));
          Date d = c.getTime();
          return format.format(d);
@@ -114,6 +115,31 @@ public class DateFormatUtil {
 	public static Date parseDate(String date) throws ParseException {
 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return format.parse(date);
+	}
+
+	//通过date 判断是否为当前日期
+	public static boolean isCurrentDay(String date) {
+		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+		Date date2 = new Date();
+		String dateCom = format.format(date2);
+		if(dateCom.equals(date)){
+			return true;
+		}
+		return false;
+	}
+	//计算所用的时间 分钟
+	public static Integer calculatorTime(String timeDiff) {
+		Integer time = 0;
+		//TODO 这里有一个bug,当timeDiff 为null 的时候不应该设置24小时
+		if(StringUtils.isEmpty(timeDiff)){
+			time = 60*24;
+		}else{
+			String[] timeArr = timeDiff.split(":");
+			Integer hours = Integer.parseInt(timeArr[0]);
+			Integer min = Integer.parseInt(timeArr[1]);
+			time = hours*60+min;
+		}
+		return time;
 	}
 	
 	

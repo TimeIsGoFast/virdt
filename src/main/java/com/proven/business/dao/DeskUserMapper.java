@@ -8,4 +8,6 @@ import tk.mybatis.mapper.common.Mapper;
 public interface DeskUserMapper extends Mapper<DeskUser> {
 
 	List<Integer> getIds();
+
+	void deleteAll();
 }

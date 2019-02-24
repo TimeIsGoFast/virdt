@@ -12,4 +12,6 @@ public interface MachineMapper extends Mapper<Machine> {
 	List<String> getAllIds();
 
 	List<String> selectByUpn(@Param(value="upn")String upn);
+
+	void deleteAll();
 }

@@ -21,5 +21,10 @@ public class DeskUserServiceImpl extends BaseServiceImpl<DeskUser> implements De
 	public List<Integer> getIds() {
 		return deskUserMapper.getIds();
 	}
+	@Override
+	public void deleteAll() {
+		deskUserMapper.deleteAll();
+		
+	}
 
 }

@@ -11,4 +11,6 @@ public interface MachineService extends BaseService<Machine>{
 
 	List<String> selectByUpn(String upn);
 
+	void deleteAll();
+
 }

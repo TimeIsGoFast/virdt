@@ -10,6 +10,7 @@ import org.core4j.Enumerable;
 import org.odata4j.core.OEntity;
 import org.odata4j.edm.EdmType;
 
+
 public abstract class AbstractGetData implements GetDataService{
 	
 	public static final Logger loger = Logger.getLogger(AbstractGetData.class);

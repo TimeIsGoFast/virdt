@@ -14,4 +14,6 @@ public interface SessionViewMapper extends Mapper<SessionView> {
 	List<SessionView> selectByPassTime(@Param(value="date")String orderDate);
 
 	List<SessionView> selectByDeskgroupIdAndPassTime(@Param(value="deskGroupId")String deskgroupId, @Param(value="date")String orderDate);
+
+	List<SessionView> getDataByCurrentDay(@Param(value="startDate")String startDate, @Param(value="endDate")String endDate);
 }
