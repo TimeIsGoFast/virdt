@@ -37,6 +37,9 @@
    <select id="selectByDeskgroupIdAndPassTime" resultMap="BaseResultMap">
    select * from t_v_session where start_date>= DATE_FORMAT(#{date},'%Y-%m-%d %H:%i:%s') and desktop_group_id=#{deskGroupId} order by end_date ASC,start_date DESC
   </select>
-  
+
+  <select id="getDataByCurrentDay" resultMap="BaseResultMap">
+   select * from t_v_session where start_date between DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%s') and DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%s')
+  </select>
   
 </mapper>

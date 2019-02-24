@@ -55,15 +55,15 @@ public class GetDataServiceImpl extends AbstractGetData{
 		String entitySetName = "Users";
 		Enumerable<OEntity> qList = consumer.getEntities(entitySetName).execute();
 	    List<Map<String,String>> list = getDataMap(qList);
-	    List<Integer> idList = deskUserService.getIds();
+	    // List<Integer> idList = deskUserService.getIds();
+	    //现在每次的策略是每更新一次，就将原先的数据给删除，然后再重新load数据
 	    try{
 	    	List<DeskUser> userlist = SetDataUtils.setDeskUserData(list);
+	    	if(userlist!=null){
+	    		deskUserService.deleteAll();
+	    	}
 	    	for (DeskUser user : userlist) {
-	    		if(!idList.contains(user.getId())){
-	    			deskUserService.save(user);
-	    		}else{
-	    			deskUserService.update(user);
-	    		}
+	    		deskUserService.save(user);	
 	    		
 			}
 	    	
@@ -88,17 +88,20 @@ public class GetDataServiceImpl extends AbstractGetData{
 			param.setPassTime("1y");
 		}
 		String date = DateFormatUtil.getDifferTime(param.getPassTime());
+		
 		//调用api 得到新的数据插入到数据苦衷	
 	    try{
+	    	String deleteDate = DateFormatUtil.toDateoString(DateFormatUtil.parseDate(date))+" 00:00:00";
 	    	strbui.append(DateFormatUtil.getCurrentTime(DateFormatUtil.parseDate(date)));
 			Enumerable<OEntity> qList;
 			qList = consumer.getEntities(entitySetName).filter(strbui.toString()).orderBy("StartDate desc").execute();    
 		    List<Map<String,String>> list = getDataMap(qList);
 	    	//通过这个date去数据库中删除date 之后的数据
-		    sessionService.deleteByLastDate(date);
+		    sessionService.deleteByLastDate(deleteDate);
 	    	List<Session> selist = SetDataUtils.setSessionData(list);
 	    	for (Session session : selist) {
 	    		session.setTimeDiff(DateFormatUtil.getTimeDiff(session.getStartDate(),session.getEndDate()) );
+	    		//if()
 	    		sessionService.save(session);
 			}
 	    	
@@ -186,16 +189,12 @@ public class GetDataServiceImpl extends AbstractGetData{
 		String entitySetName = "Machines";
 		List<Map<String,String>> querylist = new ArrayList<>();
 		try {
-			List<String> ids = machineService.getAllIds();
+			machineService.deleteAll();
 			Enumerable<OEntity> qList  =  consumer.getEntities(entitySetName).execute();
 			querylist = getDataMap(qList);
 			List<Machine> melist  = SetDataUtils.setMachineData(querylist);
 			for (Machine machine : melist) {
-				if(ids.contains(machine.getId())){
-					machineService.update(machine);
-				}else{
-					machineService.save(machine);
-				}				
+				machineService.save(machine);
 			}
 		} catch (Exception e) {
 			logger.error("getSessionData error:"+e.getMessage());
@@ -206,15 +205,17 @@ public class GetDataServiceImpl extends AbstractGetData{
 	}
 	/**
 	 * 得到实时的session 数据
+	 * @author weilongzeng
+	 * 2019/2/24 add parameter filter to this method 
 	 */
 	@Override
-	public List<SessionView> getCurrentStatus() {
+	public List<SessionView> getCurrentStatus(String filter) {
 		//EndDate eq null
 		ODataConsumer consumer = ODataConsumer.create(SERVICE_URL);	
 		String entitySetName = "Sessions";
 		List<SessionView> list = new ArrayList<>();
 		try{
-			Enumerable<OEntity> qList = consumer.getEntities(entitySetName).filter("EndDate eq null").orderBy("StartDate desc").execute(); 
+			Enumerable<OEntity> qList = consumer.getEntities(entitySetName).filter(filter).orderBy("StartDate desc").execute(); 
 			List<Map<String,String>> querylist = getDataMap(qList);
 			List<Session>  selist = SetDataUtils.setSessionData(querylist);
 			//将start date 增加8个小时
@@ -259,6 +260,7 @@ public class GetDataServiceImpl extends AbstractGetData{
 		}
 		return list;
 	}
+
 	
 		
 }

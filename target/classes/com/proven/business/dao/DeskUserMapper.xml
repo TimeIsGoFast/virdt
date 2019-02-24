@@ -24,4 +24,8 @@
   <select id="getIds" resultType="java.lang.Integer">
   select id from t_t_desk_user
   </select>
+  
+  <delete id="deleteAll">
+  delete from t_t_desk_user
+  </delete>
 </mapper>

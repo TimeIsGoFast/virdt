@@ -16,5 +16,7 @@ public interface GetDataService {
 	
 	public int getMachineData(DataParam param);
 
-	public List<SessionView> getCurrentStatus();
+	public List<SessionView> getCurrentStatus(String filter);
+
+	//public List<SessionView> getDataByCurrentDay(String date);
 }

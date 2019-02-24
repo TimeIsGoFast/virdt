@@ -62,4 +62,8 @@
   select DISTINCT desktop_group_id from t_t_machine where associated_user_UPNs=#{upn}
   </select>
   
+  <delete id="deleteAll">
+  delete from t_t_machine
+  </delete>
+  
 </mapper>

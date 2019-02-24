@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.proven.base.vo.BarData;
 import com.proven.business.model.DeskUser;
 import com.proven.business.model.SessionView;
 import com.proven.business.service.DeskUserService;
@@ -89,7 +90,8 @@ public class SessionController {
 	 */
 	@RequestMapping("/current")
 	public String getCurrentStatus(Model model){
-		List<SessionView> list = getDataService.getCurrentStatus();
+		String filter = "EndDate eq null";
+		List<SessionView> list = getDataService.getCurrentStatus(filter);
 		List<SessionView> newSessionViewList = new ArrayList<>();
 		//获取当前的用户信息，用来filter该用户下面的交付组使用情况
 		User currentUser = SpringUtil.getCurrentUser();		
@@ -109,7 +111,18 @@ public class SessionController {
 		model.addAttribute("list", newSessionViewList);
 		return "business/session/current_run_session";
 	}
+	//得到柱状图中的数据
 	
+	@RequestMapping("/refershBarData")
+	@ResponseBody
+	public BarData refershBarData(String date){
+		/*String categore = "衬衫,羊毛衫,雪纺衫,裤子,高跟鞋,袜子";
+		String data = "5, 20, 36, 10, 10, 20";
+		logger.info("categore="+categore+",data="+data);
+		*/
+		return sessionViewService.refershBarData(date);
+		
+	}
 	
 
 }

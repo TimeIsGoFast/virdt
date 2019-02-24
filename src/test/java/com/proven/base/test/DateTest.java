@@ -1,5 +1,8 @@
 package com.proven.base.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
@@ -44,5 +47,26 @@ public class DateTest {
 	public void testGetDifferTime(){
 		System.out.println(DateFormatUtil.getDifferTime("2d"));
 		
+	}
+	
+	//test param date
+	@Test
+	public void testParamDate() throws ParseException{
+		String date = "2019-02-24 00:00:00";
+		System.out.println(DateFormatUtil.parseDate(date));
+	}
+	
+	@Test
+	public void testGetStringDate() throws ParseException{
+		String date = "2019-02-23 00:00:00";
+		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(DateFormatUtil.getStringDate(Calendar.DATE, -1,format.parse(date)));
+		
+	}
+	
+	//测试calculatorTime
+	@Test
+	public void testCalculatorTime(){
+		System.out.println(DateFormatUtil.calculatorTime(null));
 	}
 }

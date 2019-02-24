@@ -9,5 +9,13 @@ $(function(){
 		window.location.href=path+"/session/render.do?deskgroupId="+deskgroupId+"&passTime="+passTime;
 	});
 	
+	$("#searchBySelectDate").click(function(){
+		console.log("start searchBySelectDate");
+		var date = $("#selectDate").val();
+		sendRequestToRefershBarData(date);
+		
+	
+	});
+	
 });
  

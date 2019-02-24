@@ -8,6 +8,7 @@
  */
 package com.proven.base.test;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.Test;
@@ -20,11 +21,13 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.proven.base.vo.DataParam;
+import com.proven.business.dao.SessionViewMapper;
 import com.proven.business.model.SessionView;
 import com.proven.business.service.SessionService;
 import com.proven.quartz.GetDataService;
 import com.proven.system.model.User;
 import com.proven.system.service.UserService;
+import com.proven.utils.DateFormatUtil;
 
 
 /**   
@@ -52,6 +55,9 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	@Autowired
 	private GetDataService GetDataService;
 	
+	@Autowired
+	private SessionViewMapper sessionViewMapper;
+	
 	
 	@Test
 	public void TestGetUser(){
@@ -76,7 +82,7 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	@Test
 	public void testupdateSessionData(){
 		DataParam param = new DataParam();
-		param.setPassTime("1y");
+		param.setPassTime("7d");
 		GetDataService.getSessionData(param);
 	}
 	
@@ -105,13 +111,36 @@ public class SpringTest extends AbstractJUnit4SpringContextTests{
 	}*/
 	
 	@Test
-	public void testGetCurrentStatus(){
-		List<SessionView> sessionList = GetDataService.getCurrentStatus();
+	public void testGetCurrentStatus() throws ParseException{
+		//String filter = "EndDate eq null";
+		String date = "2019-02-22 00:00:00";
+		StringBuilder strbui = new StringBuilder("StartDate ge DateTime");
+		strbui.append(DateFormatUtil.getCurrentTime(DateFormatUtil.parseDate(date)));
+		String filter = strbui.toString();
+		List<SessionView> sessionList = GetDataService.getCurrentStatus(filter);
+		if(sessionList.isEmpty()){
+			logger.info("sessionList is null");
+		}
 		for (SessionView sessionView : sessionList) {
 			logger.info(sessionView.getComputerName()+sessionView.getFullName()+sessionView.getTimeDiff());
 			
 		}
 	}
 
+	//测试sessionViewMapper.getDataByCurrentDay(startDate,endDate);
+	@Test
+	public void testGetDateByCurrentDay(){
+		String startDate = "2019-02-21 00:00:00";
+		String endDate = "2019-02-22 00:00:00";
+		List<SessionView> sessionList = sessionViewMapper.getDataByCurrentDay(startDate, endDate);
+		if(sessionList.isEmpty()){
+			logger.info("sessionList is null");
+		}
+		for (SessionView sessionView : sessionList) {
+			logger.info(sessionView.getComputerName()+sessionView.getFullName()+sessionView.getTimeDiff());
+			
+		}
+	}
+	
 	
 }

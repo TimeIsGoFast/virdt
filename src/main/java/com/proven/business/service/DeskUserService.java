@@ -9,4 +9,6 @@ public interface DeskUserService extends BaseService<DeskUser>{
 
 	List<Integer> getIds();
 
+	void deleteAll();
+
 }
