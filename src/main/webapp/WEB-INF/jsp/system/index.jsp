@@ -82,7 +82,9 @@
                     <li>
                         <a href="#"><i class="fa fa-table"></i>管理员审核</a>
                     </li> --%>
-                   
+                     <li>
+                        <a href="${pageContext.request.contextPath}/druid" target="_blank"><i class="fa fa-table"></i>系统监控</a>
+                    </li> 
                 </ul>
 
             </div>

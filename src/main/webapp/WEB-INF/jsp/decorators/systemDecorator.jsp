@@ -77,10 +77,10 @@
                     <%-- <li>
                         <a href="${pageContext.request.contextPath}/book/getSentencePage.do" id="sentence"><i class="fa fa-edit"></i>虚拟机</a>
                     </li>
-                    
+                     --%>
                     <li>
-                        <a href="#"><i class="fa fa-table"></i>管理员审核</a>
-                    </li>  --%>
+                        <a href="${pageContext.request.contextPath}/druid" target="_blank"><i class="fa fa-table"></i>系统监控</a>
+                    </li> 
                    
                 </ul>
 

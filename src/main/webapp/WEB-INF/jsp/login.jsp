@@ -70,6 +70,8 @@
     }
     //注册选择
     function register(){
+    	$("#_uid").val("");
+    	$("#_password").val("");
     	$(".error_message").text("");
         $("#choseLogin").hide();
         $("#choseRegister").show();

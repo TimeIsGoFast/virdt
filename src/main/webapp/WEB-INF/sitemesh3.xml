@@ -5,6 +5,7 @@
  <mapping path="/renderLogin*" exclue="true" />
  <mapping path="/system*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
  <mapping path="/user*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
+ <mapping path="/druid*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
  <mapping path="/session*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
   <mapping path="/deskUser*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" />
  <!--  <mapping path="/user*" decorator="/WEB-INF/jsp/decorators/systemDecorator.jsp" /> --> 
