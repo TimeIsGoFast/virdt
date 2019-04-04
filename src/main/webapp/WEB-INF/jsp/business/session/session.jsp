@@ -162,14 +162,19 @@
        			success:function(result){
        		 	//categoriess = result.categore;
        		    //datas =result.data; 
+       			    if(result.categore.length==0){
+       			    	console.log("main should be hide")
+	   	   		    	$("#main").hide();
+   	   		   		 }
     	   		    categoriess = result.categore.split(',');
     	   		    var dataString = result.data.split(',');
     	   		    //datas=[535,1193,1597,496,628];
 	    	   		for(var i=0;i<dataString.length;i++) {
 	    	   			datas[i] = parseInt(dataString[i]);
 	    	   		}
-    	   		    console.log(datas);
-    	   		    console.log(categoriess);
+    	   		    console.log("datas="+datas);
+    	   		    console.log("categoriess="+categoriess);
+    	   		 
 	    	   		myChart.setOption({
 	    			        xAxis: {
 	    			            data: categoriess

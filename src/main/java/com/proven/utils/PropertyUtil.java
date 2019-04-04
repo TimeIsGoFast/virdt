@@ -20,7 +20,7 @@ public class PropertyUtil {
         props = new Properties();
         InputStream in = null;
         try {
-            in = PropertyUtil.class.getClassLoader().getResourceAsStream("ontheway.properties");
+            in = PropertyUtil.class.getClassLoader().getResourceAsStream("properties/virdt.properties");
             //in = PropertyUtil.class.getResourceAsStream("/jdbc.properties");
             props.load(in);
         } catch (FileNotFoundException e) {

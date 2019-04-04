@@ -26,12 +26,13 @@ import com.proven.business.service.DeskUserService;
 import com.proven.business.service.MachineService;
 import com.proven.business.service.SessionService;
 import com.proven.utils.DateFormatUtil;
+import com.proven.utils.PropertyUtil;
 import com.proven.utils.SetDataUtils;
 
 @Service
 @Transactional
 public class GetDataServiceImpl extends AbstractGetData{
-	public static final String SERVICE_URL = "http://192.168.20.9/Citrix/Monitor/OData/v1/Data";
+	public static final String SERVICE_URL =  PropertyUtil.getProperty("service.url");
 	
 	@Autowired
 	private SessionService sessionService;
