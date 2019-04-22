@@ -35,7 +35,14 @@
   </select>
   
    <select id="selectByDeskgroupIdAndPassTime" resultMap="BaseResultMap">
-   select * from t_v_session where start_date>= DATE_FORMAT(#{date},'%Y-%m-%d %H:%i:%s') and desktop_group_id=#{deskGroupId} order by end_date ASC,start_date DESC
+   select * from t_v_session
+   <where>
+     start_date>= DATE_FORMAT(#{date},'%Y-%m-%d %H:%i:%s') 
+     <if test="deskGroupId != 'all'">
+      and machine_name=#{deskGroupId}
+     </if>
+   </where>
+    order by start_date DESC
   </select>
 
   <select id="getDataByCurrentDay" resultMap="BaseResultMap">

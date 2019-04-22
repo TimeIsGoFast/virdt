@@ -71,17 +71,10 @@
                       <li>
                         <a href="${pageContext.request.contextPath}/session/current.do" id="currentInfo"><i class="fa fa-refresh"></i>正在运行</a>
                     </li>
-             <%--        <li>
-                        <a href="${pageContext.request.contextPath}/travel/render.do" id="touristInfo"><i class="fa fa-map-marker"></i>会话记录</a>
+                     <li>
+                        <a href="${pageContext.request.contextPath}/session/getSessionTable.do" id="sessionTable"><i class="fa fa-edit"></i>图表展示</a>
                     </li>
-				
-                    <li>
-                        <a href="${pageContext.request.contextPath}/book/getSentencePage.do" id="sentence"><i class="fa fa-edit"></i>虚拟机</a>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><i class="fa fa-table"></i>管理员审核</a>
-                    </li> --%>
+
                      <li>
                         <a href="${pageContext.request.contextPath}/druid" target="_blank"><i class="fa fa-table"></i>系统监控</a>
                     </li> 

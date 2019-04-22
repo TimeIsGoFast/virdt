@@ -1,6 +1,16 @@
- $(document).ready(function () {
-   /* $('#dataTables-example').dataTable();*/
-    $("#dataTables-example").dataTable().fnDraw(false);  
+var tables;
+$(document).ready(function () {
+	tables = $("#dataTables-example").myDataTableUtil('#dataTables-example', path+'/deskUser/getPage.do', 'post',
+		[
+            {"data": 'id' },
+            {"data": 'userName' },
+            {"data": 'fullName' },
+            {"data": 'upn' },
+            {"data": 'domain' },
+            {"data": 'creatDate' },
+            {"data": 'modifiedDate' }
+        ])
+    tables.fnDraw(false);  
     $("#main-menu li a").removeClass("active-menu");
 	$("#userManage").addClass("active-menu");
 	
