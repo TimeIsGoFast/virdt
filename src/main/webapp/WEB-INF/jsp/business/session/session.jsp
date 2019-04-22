@@ -16,65 +16,58 @@
 
         
 <p></p>
-  			<div class="row">
-  			<label for="selectDate">选择日期：</label><input style="border-radius:5%;height:25px;" id="selectDate" type="date" />&nbsp;&nbsp;&nbsp;<button type="button" style="height:25px;line-height:25px;padding:0px 5px;" class="btn btn-primary" id="searchBySelectDate">查询</button>
-  				 <div id="main" style="width: 80%;height:500px;margin-top:10px;"></div>
-  			
-  			</div>
-  			
-  			        <div class="row">
-                        <div  class="col-md-1"><span  style="font-size:20px;line-height:35px;">交付组：</span>   </div>
-                		<div class="col-md-2 bs-example" data-example-ids="select-form-control" style="margin-left:-50px;">
-                		 
-					    <form>
-					      <select class="form-control" id="desktopId">
-					        <option value="all">全部</option>
-					        <option value="app">app</option>
-					        <option value="win7">win7</option>
-					      </select>
-					    </form>
-					  </div>
-					    <div  class="col-md-1"><span style="font-size:20px;line-height:35px;">时间段：</span>  </div>
-                		<div class="col-md-2 bs-example" data-example-ids="select-form-control"style="margin-left:-50px;">
-                		   
-					    <form>
-					      <select class="form-control" id="pass_time">
-					        <option value="2h">过去2小时</option>
-					        <option value="24h">过去24小时</option>
-					        <option value="7d">过去7天</option>
-					        <option value="1M">上月</option>
-					        <option value="1y">去年</option>
-					      </select>
-					    </form>
-					    
-					  </div>
-					  
-					  <div class="col-md-2">
-					  <button type="button" class="btn btn-primary" id="searchByAddition">应用</button>
-					  </div>
-                
-                </div>
+		  <div class="row">
+                <div  class="col-md-1"><span  style="font-size:20px;line-height:35px;">交付组：</span>   </div>
+           		<div class="col-md-2 bs-example" data-example-ids="select-form-control" style="margin-left:-50px;">
+				    <form>
+				      <select class="form-control" id="desktopId">
+				        <option value="all">全部</option>
+				        <option value="app">app</option>
+				        <option value="win7">win7</option>
+				      </select>
+				    </form>
+			    </div>
+			    <div  class="col-md-1"><span style="font-size:20px;line-height:35px;">时间段：</span>  </div>
+	            <div class="col-md-2 bs-example" data-example-ids="select-form-control"style="margin-left:-50px;">
+				    <form>
+				      <select class="form-control" id="pass_time">
+				        <option value="2h">过去2小时</option>
+				        <option value="24h">过去24小时</option>
+				        <option value="7d">过去7天</option>
+				        <option value="1M">上月</option>
+				        <option value="1y">去年</option>
+				      </select>
+				    </form>
+			    </div>
+			    <div class="col-md-1">
+			 		<button type="button" class="btn btn-primary" id="searchByAddition">应用</button>
+			    </div>
+			    <div class="col-md-1">
+	                <button type="button" class="btn btn-success" id="exportBtn">
+	                	<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;&nbsp;导出excel
+	                </button>
+	            </div>   
+             </div>
 			<p></p>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>用户</th>
-                                            <th>用户全称</th>
+                                            <th>用户账号</th>
+                                            <th>用户名</th>
                                             <th>计算机名称</th>
                                             <th>交付组</th>
                                             <th>会话开始时间</th>
                                             <th>会话结束时间</th>
                                             <th>会话时长</th>
-                                            <th>操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                               <%--      <tbody>
                                          <c:forEach items="${list}" var="Session">
                                             <tr class="odd gradeX">
                                             <td>${Session.userName}</td>
@@ -100,7 +93,7 @@
                                             </td>
                                         </tr>
                                          </c:forEach>
-                                    </tbody>
+                                    </tbody> --%>
                                 </table>
                             </div>
                             
@@ -131,137 +124,14 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/session.js"></script>
     <script src="${pageContext.request.contextPath}/static/echarts/echarts.min.js"></script>
-    
-    <script type="text/javascript">
-    var categoriess;
-    var datas =[];
-      $(document).ready(function () {
-   	   /* $('#dataTables-example').dataTable();*/
-   	    $("#dataTables-example").dataTable();
-   	    $("#main-menu li a").removeClass("active-menu");
-   		$("#sessionInfo").addClass("active-menu");
-   		
-   		var desktopId = '${deskgroupId}';
-   		var passTime ='${passTime}';
-   		$("#desktopId").val(desktopId);
-   		$("#pass_time").val(passTime);
-   		
-   		var currentDate = getNowFormatDate();
-   	    $("#selectDate").val(currentDate);
-   		sendRequestToRefershBarData(currentDate);
-      });
-      
-      function sendRequestToRefershBarData(currentDate){
-     		$.ajax({
-       			type:'post',
-       			url:path+'/session/refershBarData.do',
-       			dataType:'json',
-       			data:{'date':currentDate},
-       			success:function(result){
-       		 	//categoriess = result.categore;
-       		    //datas =result.data; 
-       			    if(result.categore.length==0){
-       			    	console.log("main should be hide")
-	   	   		    	$("#main").hide();
-   	   		   		 }
-    	   		    categoriess = result.categore.split(',');
-    	   		    var dataString = result.data.split(',');
-    	   		    //datas=[535,1193,1597,496,628];
-	    	   		for(var i=0;i<dataString.length;i++) {
-	    	   			datas[i] = parseInt(dataString[i]);
-	    	   		}
-    	   		    console.log("datas="+datas);
-    	   		    console.log("categoriess="+categoriess);
-    	   		 
-	    	   		myChart.setOption({
-	    			        xAxis: {
-	    			            data: categoriess
-	    			        },
-	    			        series: [{
-	    			            // 根据名字对应到相应的系列
-	    			            name: '使用时间 ',
-	    			            data:datas
-	    			        }]
-	    			 });
-       			},
-       			error:function(){
-       				$(".error_message").text("出现未知错误！");
-       			}
-       			
-       		
-       		});
-      }
-      
-      function getNowFormatDate() {
-          var date = new Date();
-          var seperator1 = "-";
-          var year = date.getFullYear();
-          var month = date.getMonth() + 1;
-          var strDate = date.getDate();
-          if (month >= 1 && month <= 9) {
-              month = "0" + month;
-          }
-          if (strDate >= 0 && strDate <= 9) {
-              strDate = "0" + strDate;
-          }
-          var currentdate = year + seperator1 + month + seperator1 + strDate;
-          return currentdate;
-      }
-      
-      // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById('main'));
-    
-      // 指定图表的配置项和数据
-     function fetchData(cb) {
-    // 通过 setTimeout 模拟异步加载
-	    myChart.hideLoading();
-	    setTimeout(function () {
-	        cb({
-	            categories: categoriess,
-	            data: datas
-	        });
-	    }, 1000);
-	}
-
-	// 初始 option
-	option = {
-		color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
-
-	    title: {
-	        text: '使用时间柱状图'
-	    },
-	    tooltip: {},
-	    legend: {
-	        data:['使用时间']
-	    },
-	    xAxis: {
-	        data: []
-	    },
-	    yAxis: {},
-	    series: [{
-	        name: '使用时间',
-	        type: 'bar',
-	        data: []
-	    }]
-	};
-	
-	fetchData(function (data) {
-	    myChart.setOption({
-	        xAxis: {
-	            data: data.categories
-	        },
-	        series: [{
-	            // 根据名字对应到相应的系列
-	            name: '使用时间 ',
-	            data: data.data
-	        }]
-	    });
-	});
-
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(option);
+    <script src="${pageContext.request.contextPath}/static/js/dataTable-util.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/session.js"></script>
+	<script>
+	var desktopId = '${deskgroupId}';
+	var passTime ='${passTime}';
+	$("#desktopId").val(desktopId);
+	$("#pass_time").val(passTime);
 	</script>
    
 	

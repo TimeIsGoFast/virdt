@@ -25,7 +25,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
@@ -36,10 +36,9 @@
                                             <th>Domain</th>
                                             <th>CreatDate</th>
                                             <th>ModifiedDate</th>
-                                            <th>操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+<!--                                     <tbody>
                                          <c:forEach items="${list}" var="User">
                                             <td>${User.id }</td>
                                             <td>${User.userName }</td>
@@ -56,7 +55,7 @@
                                             </td>
                                         </tr>
                                          </c:forEach>
-                                    </tbody>
+                                    </tbody> -->
                                 </table>
                             </div>
                             
@@ -87,6 +86,7 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${pageContext.request.contextPath}/static/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/dataTable-util.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/user.js"></script>
     
 

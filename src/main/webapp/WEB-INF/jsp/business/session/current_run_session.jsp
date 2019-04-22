@@ -101,7 +101,6 @@
     	    $("#main-menu li a").removeClass("active-menu");
     		$("#currentInfo").addClass("active-menu");
     		
-    		
     	});
     	 
     </script>

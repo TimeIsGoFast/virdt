@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.proven.base.service.impl.BaseServiceImpl;
 import com.proven.base.vo.BarData;
 import com.proven.business.dao.SessionViewMapper;
 import com.proven.business.model.SessionView;
 import com.proven.business.service.SessionViewService;
+import com.proven.parambean.SessionParam;
 import com.proven.quartz.GetDataService;
 import com.proven.utils.DateFormatUtil;
 
@@ -27,7 +30,7 @@ import com.proven.utils.DateFormatUtil;
 public class SessionViewServiceImpl extends BaseServiceImpl<SessionView> implements SessionViewService{
 	
 	private static final Logger logger = Logger.getLogger(SessionViewServiceImpl.class);
-	private static final String DEFAULT_PASS_TIME = "24h";	
+	private static final String DEFAULT_PASS_TIME = "7d";	
 	private static final String DEFAULT_DESK_GROUP_ID = "all";
 	@Autowired
 	private SessionViewMapper sessionViewMapper;
@@ -140,6 +143,47 @@ public class SessionViewServiceImpl extends BaseServiceImpl<SessionView> impleme
 		return value;
 	}
 
+	/**
+	* <p>Title: getPageData</p>  
+	* <p>Description: </p>  
+	* @param row
+	* @param page
+	* @param search
+	* @return  
+	* @see com.proven.business.service.SessionViewService#getPageData(int, int, java.lang.String)  
+	*/  
+	@Override
+	public PageInfo<SessionView> getPageData(int row, int page, String search,SessionParam sessionParam) {
+		String orderDate = getOrderDate(sessionParam);
+		
+		logger.info("getPageData method getDeskgroupId"+sessionParam.getDeskgroupId());
+		PageHelper.startPage(page, row);
+		List<SessionView> sessionList = sessionViewMapper.selectByDeskgroupIdAndPassTime(sessionParam.getDeskgroupId(),orderDate);
+		return new PageInfo<SessionView>(sessionList);
+	}
+
+	/**
+	* <p>Title: getSessionDataByParam</p>  
+	* <p>Description: </p>  
+	* @param sessionParam
+	* @return  
+	* @see com.proven.business.service.SessionViewService#getSessionDataByParam(com.proven.parambean.SessionParam)  
+	*/  
+	@Override
+	public List<SessionView> getSessionDataByParam(SessionParam sessionParam) {
+		String orderDate = getOrderDate(sessionParam);
+		return sessionViewMapper.selectByDeskgroupIdAndPassTime(sessionParam.getDeskgroupId(),orderDate);
+	}
+
+	
+	private static String getOrderDate(SessionParam sessionParam){
+		if(StringUtils.isEmpty(sessionParam.getPassTime())){
+			return DateFormatUtil.getDifferTime(DEFAULT_PASS_TIME);
+		}else{
+			return DateFormatUtil.getDifferTime(sessionParam.getPassTime());
+		}
+		
+	}
 	
 
 }

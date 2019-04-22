@@ -66,6 +66,20 @@
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" /> -->
 		<!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model"
 			/> -->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							helperDialect=mysql
+						</value>
+					</property>
+				</bean>
+				<!-- 
+				<bean class="net.zjwu.mis.base.audit.interceptor.ShiroAuditingInterceptor" />
+				 -->
+			</array>
+		</property>	
 	</bean>
 	
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
