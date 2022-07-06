@@ -23,7 +23,7 @@
 		<mapper.version>3.3.0</mapper.version>
 		<mysql.version>5.1.37-bin</mysql.version>
 		<fastjson.version>1.2.54</fastjson.version>
-		<shiro.version>1.2.4</shiro.version>
+		<shiro.version>1.9.1</shiro.version>
 		<pagehelper.version>4.0.2</pagehelper.version>
 	</properties>
  
